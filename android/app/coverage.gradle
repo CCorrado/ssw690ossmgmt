@@ -15,7 +15,7 @@ ext {
     ]
 }
 
-task jacocoTestReport(type: JacocoReport, dependsOn: 'testDebugUnitTest') {
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
 
     reports {
         //XML required by the below coverage checks
@@ -46,7 +46,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: 'testDebugUnitTest') {
     executionData = files("${buildDir}/jacoco/testDebugUnitTest.exec")
 
     doLast {
-        def report = file("${jacoco.reportsDir}/jacocoTestReport/jacocoTestReport.xml")
+        def report = file("${buildDir}/reports/coverage/report.xml")
         logger.lifecycle("Checking coverage results: ${report}")
 
         def parser = new XmlParser()
