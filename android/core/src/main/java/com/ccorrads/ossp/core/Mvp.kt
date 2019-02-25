@@ -1,6 +1,6 @@
 package com.ccorrads.ossp.core
 
-open class Mvp {
+class Mvp {
 
     interface View : ErrorView {
 

@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added database and injection module to core.
 - Added User and Auth tables aligning with [Architecture]
 - Added Network and injection module to core.
+- Added Login screen as the default screen
 
 [Unreleased]: https://github.com/CCorrado/ssw690ossmgmt/tree/master/android
 [0.0.1]: https://github.com/CCorrado/ssw690ossmgmt/tree/master/android

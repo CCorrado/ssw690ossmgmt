@@ -16,6 +16,9 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import org.joda.time.DateTime
 import org.joda.time.LocalDate
@@ -73,4 +76,20 @@ class NetworkModule {
     fun providesNetworkUtil(context: Context, gson: Gson): NetworkUtil {
         return NetworkUtil(context, gson)
     }
+
+    data class RxSchedulers(
+        val database: Scheduler,
+        val disk: Scheduler,
+        val network: Scheduler,
+        val main: Scheduler
+    )
+
+    @Singleton
+    @Provides
+    fun provideRxSchedulers() = RxSchedulers(
+        database = Schedulers.single(),
+        disk = Schedulers.io(),
+        network = Schedulers.io(),
+        main = AndroidSchedulers.mainThread()
+    )
 }

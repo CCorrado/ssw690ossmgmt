@@ -54,4 +54,5 @@ dependencies {
     implementation "com.google.code.gson:gson:$gson_version"
 
     implementation project(path: ':core')
+    implementation project(path: ':loginregistration')
 }
