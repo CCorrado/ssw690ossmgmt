@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/deep_green</color>
+    <color name="colorPrimaryDark">@color/dark_green</color>
+    <color name="colorAccent">@color/hot_pink</color>
+
+    <color name="dialog_semi_transparent">#40ffffff</color>
+
+    <color name="deep_green">#008577</color>
+    <color name="dark_green">#00574B</color>
+    <color name="hot_pink">#D81B60</color>
+    <color name="dark_grey">#4a4a4a</color>
+
+</resources>

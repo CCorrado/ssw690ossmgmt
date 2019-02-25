@@ -1,12 +1,10 @@
 package com.ccorrads.ossp
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.ccorrads.ossp.core.BaseActivity
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+    override fun layoutResId(): Int {
+        return R.layout.activity_home
     }
 }
