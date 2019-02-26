@@ -12,3 +12,7 @@
 /captures
 .externalNativeBuild
 .idea/
+**/.vs
+gateway-test/node_modules/*
+android/app/build
+android/build
