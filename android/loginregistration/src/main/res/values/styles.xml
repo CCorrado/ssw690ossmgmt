@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ButtonText">
+
+    </style>
+
+    <style name="InputText">
+        <item name="android:typeface">serif</item>
+    </style>
+
+    <style name="BodyText">
+
+    </style>
+
+    <style name="HintText" parent="BodyText">
+        <item name="android:textSize">@dimen/subtext_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/dark_grey</item>
+    </style>
+
+    <style name="TitleText" parent="BodyText">
+        <item name="android:textSize">@dimen/title_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/dark_grey</item>
+    </style>
+
+    <style name="InfoText" parent="BodyText">
+        <item name="android:textSize">@dimen/text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/dark_grey</item>
+    </style>
+
+    <style name="TextLabel" parent="Widget.Design.TextInputLayout">
+        <item name="android:textColorHint">@color/dark_grey</item>
+        <item name="android:textSize">@dimen/subtext_size</item>
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="colorAccent">@color/dark_grey</item>
+        <item name="colorControlNormal">@color/dark_grey</item>
+        <item name="colorControlActivated">@color/dark_grey</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="errorTextAppearance">@style/FormWhiteErrorStyle</item>
+        <item name="android:typeface">serif</item>
+    </style>
+</resources>

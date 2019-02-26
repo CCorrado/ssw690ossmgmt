@@ -1,12 +1,21 @@
 package com.ccorrads.ossp
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.ccorrads.ossp.core.BaseActivity
+import com.ccorrads.ossp.loginregistration.LoginRegisterActivity
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
+
+    override fun layoutResId(): Int {
+        return R.layout.activity_home
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+
+        val intent = Intent(this, LoginRegisterActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

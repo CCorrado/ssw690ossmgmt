@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Core</string>
+
+    <string name="default_error">Invalid</string>
+    <string name="unknown_error">An unknown error occurred. Please try again later.</string>
+    <string name="error_network_issue">Please check your network connection and try again.</string>
+</resources>

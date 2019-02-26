@@ -1,0 +1,96 @@
+apply plugin: 'com.android.feature'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.targetSdk
+    baseFeature true
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdk
+        targetSdkVersion rootProject.ext.targetSdk
+        versionCode 1
+        versionName "1.0"
+        resValue "string", "base_url", "https://ossp.ccorrads.com/"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+            resValue "string", "databaseName", "ossp_dev.db"
+        }
+        release {
+            minifyEnabled true
+            debuggable false
+            resValue "string", "databaseName", "ossp.db"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    application project(":app")
+    feature project(":loginregistration")
+    debugImplementation 'com.facebook.stetho:stetho:1.5.0'
+    debugImplementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.23.4'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "com.google.android.material:material:1.0.0"
+    implementation "androidx.vectordrawable:vectordrawable:1.0.1"
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation "androidx.recyclerview:recyclerview:1.0.0"
+
+    // Test helpers for LiveData
+    testImplementation "androidx.arch.core:core-testing:$lifecycle_version"
+
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // RxJava support for Room
+    implementation "androidx.room:room-rxjava2:$room_version"
+
+    // Test helpers for Room
+    testImplementation "androidx.room:room-testing:$room_version"
+
+    //Dagger
+    implementation("com.google.dagger:dagger-android:$dagger_version")
+    implementation("com.google.dagger:dagger-android-support:$dagger_version")
+    implementation("com.google.dagger:dagger:$dagger_version")
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    compileOnly 'org.glassfish:javax.annotation:10.0-b28'
+
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroid_version"
+    implementation "io.reactivex.rxjava2:rxjava:$rxJava_version"
+
+    //Immutable JODA date time library
+    implementation "net.danlew:android.joda:$joda_version"
+
+    //GSON serialization lib
+    implementation "com.google.code.gson:gson:$gson_version"
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
+
+    //OkHTTP
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:$okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+}

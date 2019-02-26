@@ -11,7 +11,7 @@ android {
         minSdkVersion rootProject.ext.minSdk
         targetSdkVersion rootProject.ext.targetSdk
         versionCode 1
-        versionName "1.0.0"
+        versionName "0.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resValue "string", "base_url", "https://ccorrads.com/"
     }
@@ -52,4 +52,7 @@ dependencies {
     implementation "androidx.core:core-ktx:$ktx_version"
     implementation "net.danlew:android.joda:$joda_version"
     implementation "com.google.code.gson:gson:$gson_version"
+
+    implementation project(path: ':core')
+    implementation project(path: ':loginregistration')
 }
