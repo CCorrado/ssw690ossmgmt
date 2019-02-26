@@ -1,6 +1,7 @@
 *.iml
 .gradle
 /local.properties
+.idea/
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
@@ -11,8 +12,3 @@
 /build
 /captures
 .externalNativeBuild
-.idea/
-**/.vs
-gateway-test/node_modules/*
-android/app/build
-android/build
