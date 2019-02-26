@@ -1,0 +1,48 @@
+http:
+  port: 8080
+admin:
+  port: 9876
+  hostname: localhost
+  # hostname will be modified in future.
+apiEndpoints:
+  api:
+    host: localhost
+    paths: '/ip'
+    # Host and paths will be defined in future.
+    # The path of the API request is appended to the service endpoint by default by the proxy policy
+serviceEndpoints:
+  httpbin:
+    url: 'https://httpbin.org'
+	# Service endpoint url here.
+policies:
+  - basic-auth
+  - cors
+  - expression
+  - key-auth
+  - log
+  - oauth2
+  - proxy
+  - rate-limit
+pipelines:
+  default:
+    apiEndpoints:
+      - api
+    policies:
+    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
+    # - key-auth:
+    # with auth, 'eg credentials create -c bob -t key-auth -q'
+    # curl -H "Authorization: apiKey ${keyID}:${keySecret}" http://localhost:8080/ip
+      - proxy:
+          - action:
+              serviceEndpoint: httpbin 
+              # default pipeline
+              changeOrigin: true
+
+# use "curl http://localhost:8080/ip"
+#
+#   port: 8080
+#   host: localhost
+#   path: /ip
+# after run "curl"
+# run eg users create
+# express-gateway would generate an user after input informations.
