@@ -13,4 +13,4 @@
 .externalNativeBuild
 .idea/
 **/.vs
-**/node_modules
+/gateway-test/node_modules/*
