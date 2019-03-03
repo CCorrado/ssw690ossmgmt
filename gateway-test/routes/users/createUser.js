@@ -69,12 +69,12 @@ module.exports = function (req, res) {
 
 function hashUserData(res, user) {
     return axios.post('http://ossp-microservices:5000/auth/signup', user)
-        .then(function (response) {
-            return sendNewUser(res, response.data)
-        })
-        .catch(function (error) {
-            return res.status(error.response.status).send(error.response.data)
-        })
+      .then(function (response) {
+          return sendNewUser(res, response.data)
+      })
+      .catch(function (error) {
+          return res.status(error.response.status).send(error.response.data)
+      })
 }
 
 function sendNewUser(res, user) {
