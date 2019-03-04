@@ -3,6 +3,7 @@ package com.ccorrads.ossp.loginregistration
 import android.os.Bundle
 import android.view.View
 import com.ccorrads.ossp.core.BaseFragment
+import com.ccorrads.ossp.loginregistration.registration.RegistrationFragment
 import kotlinx.android.synthetic.main.fragment_login_register.*
 import javax.inject.Inject
 
@@ -28,6 +29,10 @@ class LoginRegisterFragment : BaseFragment(), AuthMvp.View {
         login_email_edit.setErrorString(getString(R.string.error_invalid_email))
         login_password_edit.setErrorString(getString(R.string.error_invalid_password))
 
+        fragment_register_button.setOnClickListener {
+            presenter.onClickRegister(this)
+        }
+
         fragment_login_button.setOnClickListener {
             if (presenter.validateViews(login_email_edit, login_password_edit)) {
                 showProgress()
@@ -38,5 +43,12 @@ class LoginRegisterFragment : BaseFragment(), AuthMvp.View {
                 )
             }
         }
+    }
+
+    override fun navigateToRegistration() {
+        fragmentManager?.beginTransaction()
+            ?.addToBackStack(RegistrationFragment::class.java.simpleName)
+            ?.replace(R.id.fragment_container, RegistrationFragment())
+            ?.commit()
     }
 }

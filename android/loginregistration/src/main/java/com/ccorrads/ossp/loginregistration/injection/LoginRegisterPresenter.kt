@@ -51,6 +51,10 @@ class LoginRegisterPresenter
             .subscribe(getObserver(loginView))
     }
 
+    override fun onClickRegister(loginView: AuthMvp.View) {
+        loginView.navigateToRegistration()
+    }
+
     override fun cancel() {
         disposable.clear()
     }

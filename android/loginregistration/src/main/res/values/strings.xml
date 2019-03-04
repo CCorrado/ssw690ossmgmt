@@ -4,7 +4,9 @@
     <string name="app_name">OSSP Android</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
+    <string name="reenter_password">Re-enter Password</string>
     <string name="prompt_register">Register</string>
+    <string name="prompt_name">Your Name</string>
     <string name="sign_in">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
