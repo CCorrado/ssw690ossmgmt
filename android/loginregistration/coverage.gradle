@@ -38,8 +38,8 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
                     '**/*Mapper*',
                     '**/api/**']
 
-    def debugTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug/com/ccorrads/ossp/app", excludes: excludes) +
-            fileTree(dir: "${buildDir}/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/ccorrads/ossp/app", excludes: excludes)
+    def debugTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug/com/ccorrads/ossp/loginregistration", excludes: excludes) +
+            fileTree(dir: "${buildDir}/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/ccorrads/ossp/loginregistration", excludes: excludes)
     def mainSrc = "${project.projectDir}/src/main/java"
 
     sourceDirectories = files([mainSrc])

@@ -115,3 +115,4 @@ settings.json
 gateway-test/node_modules/*
 android/app/build
 android/build
+jacoco.exec
