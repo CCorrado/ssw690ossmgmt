@@ -11,7 +11,7 @@
             android:layout_height="0dp">
 
         <TextView android:layout_width="match_parent"
-                  android:id="@+id/fragment_login_register_title_text"
+                  android:id="@+id/fragment_registration_title_text"
                   android:layout_height="match_parent"
                   app:layout_constraintStart_toStartOf="parent"
                   app:layout_constraintEnd_toEndOf="parent"
@@ -23,22 +23,44 @@
                   android:textSize="30sp"
                   android:gravity="center"
                   app:layout_constraintTop_toTopOf="parent"
-                  app:layout_constraintBottom_toTopOf="@id/input_layout_login"/>
+                  app:layout_constraintBottom_toTopOf="@id/input_layout_register"/>
 
         <LinearLayout android:layout_width="match_parent"
                       android:orientation="vertical"
-                      android:id="@+id/input_layout_login"
-                      app:layout_constraintTop_toBottomOf="@id/fragment_login_register_title_text"
+                      android:id="@+id/input_layout_register"
+                      app:layout_constraintTop_toBottomOf="@id/fragment_registration_title_text"
                       app:layout_constraintStart_toStartOf="parent"
                       app:layout_constraintEnd_toEndOf="parent"
-                      app:layout_constraintBottom_toTopOf="@id/fragment_register_button"
+                      app:layout_constraintBottom_toBottomOf="parent"
                       android:background="@android:color/white"
                       android:layout_marginStart="15dp"
                       android:layout_marginEnd="15dp"
                       android:layout_height="wrap_content">
-
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/login_email"
+                    android:id="@+id/register_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_name"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:errorTextAppearance="@style/FormWhiteErrorStyle"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                <com.ccorrads.ossp.loginregistration.views.ValidatableText
+                        android:id="@+id/register_name_edit"
+                        style="@style/HintText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/register_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_email"
@@ -53,7 +75,7 @@
                     app:layout_constraintStart_toStartOf="parent">
 
                 <com.ccorrads.ossp.loginregistration.views.ValidatableEmail
-                        android:id="@+id/login_email_edit"
+                        android:id="@+id/register_email_edit"
                         style="@style/HintText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -62,7 +84,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/login_password"
+                    android:id="@+id/register_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -73,10 +95,10 @@
                     app:errorTextAppearance="@style/FormWhiteErrorStyle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/login_email">
+                    app:layout_constraintTop_toBottomOf="@+id/register_email">
 
-                <com.ccorrads.ossp.loginregistration.views.ValidatableText
-                        android:id="@+id/login_password_edit"
+                <com.ccorrads.ossp.loginregistration.views.ValidatablePw
+                        android:id="@+id/register_password_edit"
                         android:hint="@string/prompt_password"
                         style="@style/HintText"
                         android:layout_width="match_parent"
@@ -85,13 +107,37 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/register_password_repeat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:errorTextAppearance="@style/FormWhiteErrorStyle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/register_email">
+
+                <com.ccorrads.ossp.loginregistration.views.ValidatablePw
+                        android:id="@+id/register_password_edit_repeat"
+                        android:hint="@string/reenter_password"
+                        style="@style/HintText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <Button
-                    android:id="@+id/fragment_login_button"
+                    android:id="@+id/fragment_register_button"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@color/colorPrimary"
                     android:gravity="center"
-                    android:text="@string/sign_in"
+                    android:text="@string/prompt_register"
                     android:textColor="@android:color/white"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
@@ -101,25 +147,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/login_password"/>
+                    app:layout_constraintTop_toBottomOf="@id/register_password"/>
         </LinearLayout>
-
-        <Button
-                android:id="@+id/fragment_register_button"
-                android:layout_width="match_parent"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="25dp"
-                android:background="@android:color/white"
-                android:textAllCaps="false"
-                android:gravity="center"
-                android:text="@string/prompt_register"
-                android:textColor="@color/colorPrimary"
-                style="@style/ButtonText"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/input_layout_login"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

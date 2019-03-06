@@ -9,6 +9,7 @@ import com.ccorrads.ossp.core.network.BackendService
 import com.ccorrads.ossp.core.network.NetworkUtil
 import com.ccorrads.ossp.core.network.interceptors.AuthInterceptor
 import com.ccorrads.ossp.core.network.interceptors.DefaultInterceptor
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
@@ -53,6 +54,7 @@ class NetworkModule {
         val okHttpBuilder = OkHttpClient.Builder()
         okHttpBuilder.addInterceptor(DefaultInterceptor().defaultInterceptor)
         okHttpBuilder.addInterceptor(interceptor)
+        okHttpBuilder.addInterceptor(StethoInterceptor())
         //Handle cookies
         okHttpBuilder.cookieJar(cookieJar)
 

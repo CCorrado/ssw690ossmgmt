@@ -5,12 +5,14 @@ import com.ccorrads.ossp.core.injection.DatabaseModule
 import com.ccorrads.ossp.core.injection.NetworkModule
 import com.ccorrads.ossp.loginregistration.LoginRegisterActivity
 import com.ccorrads.ossp.loginregistration.LoginRegisterFragment
+import com.ccorrads.ossp.loginregistration.registration.RegistrationFragment
+import com.ccorrads.ossp.loginregistration.registration.injection.RegisterModule
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [DatabaseModule::class, NetworkModule::class, LoginRegisterModule::class])
+@Component(modules = [DatabaseModule::class, NetworkModule::class, LoginRegisterModule::class, RegisterModule::class])
 interface LoginRegisterComponent {
 
     @Component.Builder
@@ -25,4 +27,6 @@ interface LoginRegisterComponent {
     fun inject(activity: LoginRegisterActivity)
 
     fun plus(fragment: LoginRegisterFragment)
+
+    fun plus(fragment: RegistrationFragment)
 }
