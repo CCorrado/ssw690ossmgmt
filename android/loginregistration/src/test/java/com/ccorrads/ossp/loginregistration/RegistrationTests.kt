@@ -5,6 +5,12 @@ import com.ccorrads.ossp.core.injection.NetworkModule
 import com.ccorrads.ossp.core.network.BackendService
 import com.ccorrads.ossp.core.network.NetworkUtil
 import com.ccorrads.ossp.loginregistration.registration.injection.RegisterPresenter
+import junit.framework.TestCase
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.Mock
+import org.mockito.junit.MockitoJUnitRunner
 
 
 @RunWith(MockitoJUnitRunner::class)
