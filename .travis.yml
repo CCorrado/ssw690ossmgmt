@@ -17,6 +17,8 @@ matrix:
         - chmod +x gradlew
       script:
         - "./gradlew clean assembleDebug lint jacocoTestReport -PdisablePreDex"
+      after_script:
+        - "java -jar ../codacy-coverage-reporter-4.0.5-assembly.jar report -l Kotlin -r ./loginregistration/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml"
     - language: node_js
       node_js:
         - "iojs"
