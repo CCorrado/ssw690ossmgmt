@@ -15,7 +15,7 @@ ext {
     ]
 }
 
-task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
 
     reports {
         //XML required by the below coverage checks
@@ -38,7 +38,8 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'crea
                     '**/*Mapper*',
                     '**/api/**']
 
-    def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug/com/ccorrads/ossp", excludes: excludes)
+    def debugTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug/com/ccorrads/ossp/app", excludes: excludes) +
+            fileTree(dir: "${buildDir}/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/ccorrads/ossp/app", excludes: excludes)
     def mainSrc = "${project.projectDir}/src/main/java"
 
     sourceDirectories = files([mainSrc])
@@ -46,7 +47,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'crea
     executionData = files("${buildDir}/jacoco/testDebugUnitTest.exec")
 
     doLast {
-        def report = file("${buildDir}/reports/coverage/debug/report.xml")
+        def report = file("${buildDir}/reports/jacoco/jacocoTestReport/jacocoTestReport.xml")
         logger.lifecycle("Checking coverage results: ${report}")
 
         def parser = new XmlParser()
