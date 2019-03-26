@@ -1,12 +1,16 @@
 package bao.webapp.service;
 
-import bao.webapp.model.User;
-
 import java.util.List;
+
+import bao.webapp.model.User;
 
 public interface UserService {
 
-    List<User> list();
+	public List<User> list();
 
-    User findById(long id);
+	public User findById(long id);
+
+	public User findByUsername(String username);
+
+	public void create(User user);
 }

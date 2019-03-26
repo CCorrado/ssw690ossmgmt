@@ -1,67 +1,79 @@
 package bao.webapp.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Date;
 
-@Entity(name = "users")
+@Entity(name = "User")
 public class User {
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Long userID;
 
-	@Column(name = "type")
-	private String type;
-
-	@Column(name = "role")
+	@Column(name = "Role")
 	private String role;
 
-	@Column(name = "full_name")
-	private String fullName;
+	@Column(name = "Name")
+	private String name;
+	
+	@Column(name = "Username")
+	private String userName;
+	
+	@Column(name = "Password")
+	private String password;
 
-	@Column(name = "birthdate")
-	private Date birthDate;
+	@Column(name = "CreateDate")
+	private Date createDate;
 
-	public Long getId() {
-		return id;
+	public Long getUserID() {
+		return userID;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUserID(Long userID) {
+		this.userID = userID;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getRoll() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRoll(String roll) {
-		this.role = roll;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
-	public String getFullName() {
-		return fullName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public Date getBirthDate() {
-		return birthDate;
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
+	public String getUserName() {
+		return userName;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public String getPassword() {
+		return password;
 	}
 
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 }
