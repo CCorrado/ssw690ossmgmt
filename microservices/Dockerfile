@@ -1,18 +1,9 @@
-FROM python:3.7
+# https://hub.docker.com/r/library/python/tags/
+FROM python:3-onbuild
 
-RUN apt-get update
-RUN apt-get install -y supervisor
-RUN pip install uwsgi
+# Coping source in current directory into the image
+# python:3-onbuild expects the source in /usr/src/app
+COPY . /usr/src/app
 
-RUN mkdir -p /deploy/ossp
-RUN mkdir -p /deploy/log/uwsgi
-
-ADD ossp /deploy/ossp/
-WORKDIR /deploy/ossp
-
-RUN pip install -r requirements.txt
-
-COPY conf/uwsgi.ini /deploy/uwsgi.ini 
-COPY conf/supervisor.conf /etc/supervisor/conf.d/
-
-CMD ["supervisord", "-n"]
+# Commands in a list
+CMD ["python", "manager.py"]
