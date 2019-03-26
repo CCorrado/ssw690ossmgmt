@@ -43,5 +43,4 @@ def dev():
 
 
 if __name__ == '__main__':
-    if os.environ.get('ossp') == 'production':
-        run_simple('0.0.0.0', 5000, app, use_reloader=False, use_debugger=False)
+    run_simple('0.0.0.0', 5000, app, use_reloader=False, use_debugger=False)
