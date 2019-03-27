@@ -1,0 +1,60 @@
+[
+  {
+    "business": {
+      "businessid": "bigint",
+      "business_name": "string",
+      "create_date": "datetime"
+    }
+  },
+  {
+    "hibernate_sequence": {
+      "next_val": "bigint"
+    }
+  },
+  {
+    "inventory": {
+      "id": "int",
+      "name": "string",
+      "quantity": "int",
+      "price": "double"
+    }
+  },
+  {
+    "orders": {
+      "orderid": "bigint",
+      "businessid": "bigint",
+      "create_date": "datetime",
+      "destination": "string",
+      "goods": "blob",
+      "status": "string",
+      "userid": "bigint"
+    }
+  },
+  {
+    "sale": {
+      "BusinessID": "int",
+      "Product": "string",
+      "Quantity": "int",
+      "Price": "double",
+      "DealDate": "datetime",
+      "Revenue": "double"
+    }
+  },
+  {
+    "user": {
+      "userid": "bigint",
+      "create_date": "datetime",
+      "name": "string",
+      "password": "string",
+      "role": "string",
+      "username": "string"
+    }
+  },
+  {
+    "auth": {
+      "userId": "bigint",
+      "access_token": "string",
+      "refresh_token": "string"
+    }
+  }
+]
