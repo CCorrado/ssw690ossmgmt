@@ -1,0 +1,35 @@
+version: '2'
+volumes:
+  dbdata:
+
+services:
+  osspmgmt-mysql:
+    image: mysql:latest
+    container_name: mysql
+    volumes:
+      - dbdata:/var/lib/mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=OSSPMGMT
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+    ports:
+      - "33061:3306"
+  osspmgmt-spring-boot:
+    image: java:8
+    depends_on:
+      - osspmgmt-mysql
+    ports:
+      - 8080:8080
+    environment:
+      - DATABASE_HOST=docker-mysql
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=root
+      - DATABASE_NAME=OSSPMGMT
+      - DATABASE_PORT=3306
+    volumes:
+      - ~/.gradle:/root/.gradle
+      - .:/app
+    build: .
+    command: ./gradlew build

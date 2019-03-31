@@ -1,9 +1,5 @@
-FROM java:8
-
+FROM openjdk:8-jdk-alpine
 VOLUME /tmp
-
-EXPOSE 8080
-
-ADD /build/libs/gradle-springboot-1.0.jar gradle-springboot-1.0.jar
-
-ENTRYPOINT ["java","-jar","gradle-springboot-1.0.jar"]
+ADD /build/libs/bao-web-app-0.0.1-SNAPSHOT.jar app.jar
+ADD . app/
+ENTRYPOINT ["app/gradlew","build","&&","java","-jar","app.jar"]
