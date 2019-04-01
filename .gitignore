@@ -116,3 +116,9 @@ gateway-test/.vs/*
 android/app/build
 android/build
 jacoco.exec
+/.metadata/
+/.recommenders/
+bao-web-app/src/bin/
+.settings/
+.project
+.classpath
