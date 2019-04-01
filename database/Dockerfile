@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk-alpine
 VOLUME /tmp
-ADD /build/libs/database-0.0.1.jar app.jar
-ADD . app/
+COPY /build/libs/database-0.0.1.jar app.jar
+COPY . app/
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","app.jar"]
