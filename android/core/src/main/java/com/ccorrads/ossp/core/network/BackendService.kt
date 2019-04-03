@@ -12,6 +12,6 @@ interface BackendService {
     @POST("login")
     fun loginUser(@Body request: LoginRequest): Single<Auth>
 
-    @POST("register")
+    @POST("users")
     fun registerUser(@Body request: RegisterRequest): Single<Auth>
 }

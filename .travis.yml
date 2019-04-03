@@ -38,7 +38,7 @@ matrix:
         - sudo pip install -U setuptools
         - sudo pip install -r requirements.txt
       script:
-        - sudo pytest
+        - sudo python -m pytest
     - language: java
       sudo: required
       jdk: oraclejdk8

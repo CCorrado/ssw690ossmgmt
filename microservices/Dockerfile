@@ -1,9 +1,14 @@
 # https://hub.docker.com/r/library/python/tags/
-FROM python:3-onbuild
+FROM python:3
+
+WORKDIR /microservices
+
+VOLUME /tmp
 
 # Coping source in current directory into the image
-# python:3-onbuild expects the source in /usr/src/app
-COPY . /usr/src/app
+COPY . /microservices
 
 # Commands in a list
-CMD ["python", "manager.py"]
+RUN ["pip3", "install", "-r", "requirements.txt"]
+
+CMD ["manager.py"]

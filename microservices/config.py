@@ -5,11 +5,6 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config(object):
-    DATABASE_CONNECT_OPTIONS = {}
-
-    # Turn off Flask-SQLAlchemy event system
-    SQLALCHEMY_TRACK_MODIFICATIONS = True
-
     # Application threads. A common general assumption is
     # using 2 per available processor cores - to handle
     # incoming requests using one and performing background

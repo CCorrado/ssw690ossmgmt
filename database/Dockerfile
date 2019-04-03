@@ -1,6 +1,12 @@
-FROM openjdk:8-jdk-alpine
-VOLUME /tmp
-COPY /build/libs/database-0.0.1.jar app.jar
-COPY . app/
+FROM openjdk:8-jdk
+
+COPY . /database
+WORKDIR /database
+
+RUN ["./gradlew", "build"]
+RUN mv ./build/libs/database-0.0.1.jar app.jar
+
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","app.jar"]
+
+RUN sh -c "ls -al"
+CMD java -jar app.jar

@@ -1,0 +1,40 @@
+version: '3'
+volumes:
+  dbdata:
+
+services:
+  osspmgmt-mysql:
+    image: mysql:latest
+    volumes:
+      - dbdata:/var/lib/mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=OSSMGMT
+      - MYSQL_PASSWORD=root
+    ports:
+      - 33061:3306
+  osspmgmt-spring-boot:
+    build: database
+    depends_on:
+      - osspmgmt-mysql
+    env_file:
+      - database/db.env
+    ports:
+      - 8080:8080
+  ossp-api:
+    build: gateway-test
+    volumes:
+      - /gateway-test/node_modules
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=development
+  ossp-microservices:
+    depends_on:
+      - osspmgmt-spring-boot
+    ports:
+      - 5000:5000
+    env_file:
+      - microservices/dev.env
+    build: microservices
