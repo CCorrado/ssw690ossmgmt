@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var frontLoginRouter = require('./routes/frontend/frontend_login');
 var microLoginRouter = require('./routes/microservices/micro_login');
+var dbData = require('./routes/database/db_register');
 
 var app = express();
 

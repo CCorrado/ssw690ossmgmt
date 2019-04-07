@@ -1,7 +1,7 @@
 "use strict";
-var express = require('express');
-var router = express.Router();
-var request = require('request');
+const express = require('express');
+const router = express.Router();
+const request = require('request');
 /*
  * Design a router for every request from different User(Frontend, Microservice, Database)
  * 1 router for all and judging them by their body is not sufficient.
@@ -15,32 +15,19 @@ var request = require('request');
  * Database -> proxy -> Microservice; e.g. Database feeds back Auth results.
  * Microservice -> proxy -> Frontend; e.g. Microservices informs frontend login successful. 
  */
-router.post('/micro/login', async function (req, res, next) {
-    var data = JSON.parse(req.body),
-    ServerCookie = req.headers.cookie,
-    nres = res;
-
-    if (true)
-    {
-        /*
-        * Requiring head/body to identify
-        * E.G. head.something == requiring data from database
-        * 
-        */
-        request("http://database.com/login", function (err, response, body) {
-            
-        });
-    }
-
-    request("http://frontend.com/login", function (err, response, body) {
-            if (!err && response.statusCode == 200)
-            {
-                var data = JSON.parse(body);
-                if (data.username != null)
-                    res.render("micro/login", data);
-            }
+router.post('/login', (req, res, next) => {
+    res.send(req.body);
+    request({
+        url: 'http://127.0.0.1:5000/login',
+        method: POST,
+        json: true,
+        head: {
+            "content-type": "application/json",
+        },
+        body: JSON.stringify(req.body),
+    }, async (err, response, body) => {
+        res.send(body);
     });
-    next();
 });
 
 

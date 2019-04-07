@@ -1,8 +1,8 @@
 "use strict"
 
-var express = import("express");
+var express = require("express");
 var router = express.Router();
-var request = import("request");
+var request = require("request");
 
 router.post("/frontend/register", async function (req, res, next) {
     req = request("http://microservice.com/register?redirect=", function (err, response, body) {
