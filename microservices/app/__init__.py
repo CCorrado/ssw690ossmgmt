@@ -1,12 +1,10 @@
 from flasgger import Swagger
 from flask import Flask
 from flask_login import LoginManager
-from flask_sendgrid import SendGrid
 from flask_wtf import CSRFProtect
 
 from config import config
 
-mail = SendGrid()
 csrf = CSRFProtect()
 
 # Set up Flask-login
@@ -20,7 +18,6 @@ def create_app(config_name):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
 
-    mail.init_app(app)
     csrf.init_app(app)
     login_manager.init_app(app)
 
