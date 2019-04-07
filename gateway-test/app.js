@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var frontLoginRouter = require('./routes/frontend/frontend_login');
 var microLoginRouter = require('./routes/microservices/micro_login');
+var dbData = require('./routes/database/db_register');
 
 var app = express();
 
@@ -25,12 +26,12 @@ app.use('/frontend/Login', frontLoginRouter);
 app.use('/microservices/Login', microLoginRouter)
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
