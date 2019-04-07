@@ -69,6 +69,9 @@ dependencies {
     api "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
+    //Immutable JODA date time library
+    implementation "net.danlew:android.joda:$joda_version"
+
     //OkHTTP
     api "com.squareup.okhttp3:okhttp:$okhttp_version"
     api "com.squareup.okhttp3:okhttp-urlconnection:$okhttp_version"

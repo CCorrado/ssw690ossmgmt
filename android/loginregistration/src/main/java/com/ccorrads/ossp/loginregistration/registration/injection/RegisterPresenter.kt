@@ -11,6 +11,7 @@ import com.ccorrads.ossp.core.network.observers.SingleErrorHandlingObserver
 import com.ccorrads.ossp.loginregistration.registration.RegisterMvp
 import com.ccorrads.ossp.loginregistration.views.ValidatableText
 import io.reactivex.disposables.CompositeDisposable
+import org.joda.time.DateTime
 import javax.inject.Inject
 
 class RegisterPresenter
@@ -34,7 +35,13 @@ class RegisterPresenter
 
     override fun registerUser(registerView: RegisterMvp.View, username: String?, pw: String?, fullName: String?) {
         backendService.registerUser(
-            RegisterRequest(username = username, password = pw, fullName = fullName)
+                RegisterRequest(
+                        userName = username,
+                        password = pw,
+                        name = fullName,
+                        createDate = DateTime.now(),
+                        role = "SSW 690 Demo"
+                )
         ).observeOn(rxSchedulers.main).subscribeOn(rxSchedulers.disk).subscribe(getObserver(registerView))
     }
 
@@ -45,6 +52,7 @@ class RegisterPresenter
                 authDao.clear()
                 authDao.insertAuth(t)
                 registerView.hideProgress()
+                registerView.showMessage("User is successfully Registered!!")
             }
 
             override fun onError(t: Throwable) {

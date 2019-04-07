@@ -26,14 +26,14 @@ def create_app(config_name):
         ],
         "specs": [
             {
-                "endpoint": 'apispec',
+                "endpoint": '/',
                 "route": '/apispec.json',
                 "rule_filter": lambda rule: True,  # all in
                 "model_filter": lambda tag: True,  # all in
             }
         ],
         "static_url_path": "/flasgger_static",
-        "specs_route": "/" if config_name == 'api' else '/api/'
+        "specs_route": "/"
     }
     Swagger(app, config=api_config)
 

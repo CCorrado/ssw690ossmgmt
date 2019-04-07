@@ -1,4 +1,4 @@
-FROM node:8.12.0
+FROM node:8.15.1
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
@@ -16,4 +16,7 @@ RUN groupadd -r nodejs \
 RUN chown -R nodejs:nodejs /usr/src/app
 
 USER nodejs
-CMD ["npm", "start"]
+
+EXPOSE 3000
+
+ENTRYPOINT ["npm", "start"]
