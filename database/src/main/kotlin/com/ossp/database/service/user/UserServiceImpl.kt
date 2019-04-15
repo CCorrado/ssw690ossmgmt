@@ -1,4 +1,4 @@
-package com.ossp.database.service
+package com.ossp.database.service.user
 
 import com.ossp.database.model.User
 import com.ossp.database.repository.UserRepository
@@ -33,11 +33,10 @@ class UserServiceImpl : UserService {
     }
 
     override fun findByUsername(username: String): User? {
-        return this.userRepository?.findByUserName(username)
+        return this.userRepository?.findByUsername(username)
     }
 
     override fun create(user: User): User? {
-        this.userRepository?.save(user)
-        return userRepository?.findByUserName(user.userName)
+        return this.userRepository?.save(user)
     }
 }

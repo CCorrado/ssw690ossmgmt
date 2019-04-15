@@ -3,7 +3,6 @@
 const clients = require('../../models/clients')
 const OAuthError = require('../../errors/OAuthError')
 const HttpError = require('../../errors/HttpError')
-const users = require('../../models/users')
 const jwt = require('jsonwebtoken')
 const axios = require("axios");
 
@@ -70,17 +69,21 @@ function handlePasswordGrant (req, res) {
       throw OAuthError.makeInvalidRequestError('password')
   }
 
-  const user = users.find(obj => obj.email === req.body.username)
-
-  if (!user) {
-    throw OAuthError.makeInvalidCredentialsError()
-  }
-
-  if (user.password !== req.body.password) {
-    throw OAuthError.makeInvalidCredentialsError()
-  }
-
-  sendToken(res, user.id)
+  axios.get('http://osspmgmt-spring-boot:8080/users/' + req.body.username)
+    .then(function (response) {
+      const user = response.body
+      if (!user) {
+        throw OAuthError.makeInvalidCredentialsError()
+      }
+      if (user.password !== req.body.password) {
+        console.log("Bad password :)")
+        throw OAuthError.makeInvalidCredentialsError()
+      }
+      sendToken(res, user.id)
+    })
+    .catch(function (error) {
+      throw new HttpError.makeServiceError("The user does not exist")
+    });
 }
 
 function handleRefreshToken (req, res) {
@@ -113,6 +116,7 @@ function sendToken (res, subject) {
   }
 
   const UserSession = {
+    "userId": options.subject,
     "access_token": jwt.sign({}, 'ossp', Object.assign(options, { expiresIn: '2 hours' })),
     "token_type": "bearer",
     "expires_in": 60 * 60 * 24,
@@ -122,8 +126,7 @@ function sendToken (res, subject) {
   //Save this user to the database
   axios.post('http://osspmgmt-spring-boot:8080/users', UserSession)
     .then(function (response) {
-      console.log(response);
-      res.status(201).send(UserSession)
+      res.status(201).send(response)
     })
     .catch(function (error) {
       throw new HttpError.makeServiceError("The database failed to save the request")

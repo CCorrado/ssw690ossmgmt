@@ -1,7 +1,7 @@
 'use strict'
 
 class HttpError extends Error {
-  constructor (statusCode = 500, body = undefined) {
+  constructor (statusCode = 500, body = null) {
     super()
 
     this.statusCode = statusCode
@@ -20,10 +20,9 @@ class HttpError extends Error {
     return new HttpError(404)
   }
 
-  static makeServiceError (body) {
+  static makeServiceError (message) {
     return new HttpError(
-      400,
-      body
+      400
     )
   }
 }
