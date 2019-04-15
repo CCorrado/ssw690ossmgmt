@@ -1,0 +1,8 @@
+[
+  {
+    "id": "uniqueclientid",
+    "title": "OSSP",
+    "clientId": "uniqueID",
+    "clientSecret": "uniqueSecret"
+  }
+]
