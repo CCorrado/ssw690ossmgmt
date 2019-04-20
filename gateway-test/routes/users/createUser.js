@@ -1,6 +1,6 @@
 'use strict'
 
-const HttpError = require('../../errors/HttpError')
+const UserError = require('../../errors/UserError')
 const jwt = require("jsonwebtoken");
 const axios = require("axios");
 
@@ -82,6 +82,6 @@ function sendNewUser (res, user) {
       res.status(201).send(response)
     })
     .catch(function (error) {
-      res.status(400).send(error)
+      throw UserError.makeServiceError(error)
     });
 }

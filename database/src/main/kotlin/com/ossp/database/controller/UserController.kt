@@ -1,5 +1,7 @@
 package com.ossp.database.controller
 
+import com.ossp.database.error.ObjectNotCreated
+import com.ossp.database.error.ObjectNotFound
 import com.ossp.database.model.AuthInfo
 import com.ossp.database.model.Session
 import com.ossp.database.model.User
@@ -9,7 +11,6 @@ import com.ossp.database.service.user.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.server.ResponseStatusException
 import java.util.*
 
 @RestController
@@ -31,7 +32,7 @@ class UserController {
         userService?.findById(id)?.let {
             return it
         } ?: run {
-            throw ResponseStatusException(HttpStatus.NOT_FOUND, "User with id $id not found")
+            throw ObjectNotFound(message = "User with id $id not found")
         }
     }
 
@@ -42,7 +43,7 @@ class UserController {
         user?.let {
             return AuthInfo(it.username, it.password)
         } ?: run {
-            throw ResponseStatusException(HttpStatus.NOT_FOUND, "User with username $username not found")
+            throw ObjectNotFound(message = "User with username $username not found")
         }
     }
 
@@ -72,7 +73,10 @@ class UserController {
                     password = null
             )
         } ?: run {
-            return null
+            throw ObjectNotCreated(
+                    message = "Could not create user $user",
+                    status = HttpStatus.NOT_FOUND
+            )
         }
     }
 

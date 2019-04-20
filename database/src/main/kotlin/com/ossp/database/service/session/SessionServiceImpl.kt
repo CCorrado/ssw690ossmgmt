@@ -1,5 +1,6 @@
 package com.ossp.database.service.session
 
+import com.ossp.database.error.ObjectNotFound
 import com.ossp.database.model.Session
 import com.ossp.database.repository.SessionRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -28,7 +29,7 @@ class SessionServiceImpl : SessionService {
         id?.let { sessionId ->
             return this.sessionRepository?.findById(sessionId)?.get()
         } ?: run {
-            return null
+            throw ObjectNotFound(message = "Could not find session with id $id")
         }
     }
 

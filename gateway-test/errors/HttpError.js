@@ -19,12 +19,6 @@ class HttpError extends Error {
   static makeNotFoundError () {
     return new HttpError(404)
   }
-
-  static makeServiceError (message) {
-    return new HttpError(
-      400
-    )
-  }
 }
 
 module.exports = HttpError

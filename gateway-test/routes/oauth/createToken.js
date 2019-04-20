@@ -5,6 +5,7 @@ const OAuthError = require('../../errors/OAuthError')
 const HttpError = require('../../errors/HttpError')
 const jwt = require('jsonwebtoken')
 const axios = require("axios");
+const UserError = require("../../errors/UserError");
 
 /**
  * @typedef TokenRequest
@@ -82,7 +83,7 @@ function handlePasswordGrant (req, res) {
       sendToken(res, user.id)
     })
     .catch(function (error) {
-      throw new HttpError.makeServiceError("The user does not exist")
+      throw new UserError.makeServiceError(error)
     });
 }
 
@@ -129,6 +130,6 @@ function sendToken (res, subject) {
       res.status(201).send(response)
     })
     .catch(function (error) {
-      throw new HttpError.makeServiceError("The database failed to save the request")
+      throw UserError.makeServiceError(error)
     });
 }

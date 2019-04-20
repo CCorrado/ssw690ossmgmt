@@ -1,5 +1,6 @@
 package com.ossp.database.service.user
 
+import com.ossp.database.error.ObjectNotFound
 import com.ossp.database.model.User
 import com.ossp.database.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -28,7 +29,7 @@ class UserServiceImpl : UserService {
         id?.let { userId ->
             return this.userRepository?.findById(userId)?.get()
         } ?: run {
-            return null
+            throw ObjectNotFound(message = "Could not find user with id $id")
         }
     }
 
