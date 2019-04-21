@@ -1,6 +1,5 @@
 'use strict'
 
-const UserError = require('../../errors/UserError')
 const jwt = require("jsonwebtoken");
 const axios = require("axios");
 
@@ -79,9 +78,10 @@ function sendNewUser (res, user) {
   //Save this user to the database
   axios.post('http://osspmgmt-spring-boot:8080/users', user)
     .then(function (response) {
-      res.status(201).send(response)
+      console.log(response)
+      return res.status(201).send(response.data)
     })
     .catch(function (error) {
-      throw UserError.makeServiceError(error)
-    });
+      return Promise.reject(error.response);
+    })
 }

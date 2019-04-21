@@ -127,9 +127,9 @@ function sendToken (res, subject) {
   //Save this user to the database
   axios.post('http://osspmgmt-spring-boot:8080/users', UserSession)
     .then(function (response) {
-      res.status(201).send(response)
+      return res.status(201).send(response.data)
     })
     .catch(function (error) {
-      throw UserError.makeServiceError(error)
+      return Promise.reject(error.response);
     });
 }

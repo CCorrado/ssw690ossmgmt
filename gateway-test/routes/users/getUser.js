@@ -1,7 +1,6 @@
 'use strict'
 
-const HttpError = require('../../errors/HttpError')
-const users = require('../../models/users.json')
+const axios = require("axios");
 
 /**
  * @typedef ErrorResponse
@@ -28,11 +27,12 @@ const users = require('../../models/users.json')
  * @security JWT
  */
 module.exports = function (req, res) {
-  const user = users.find(user => user.id === req.params.id)
-
-  if (!user) {
-    throw HttpError.makeNotFoundError()
-  }
-
-  res.send(user)
+  axios.get('http://osspmgmt-spring-boot:8080/users/' + req.params.id)
+    .then(function (response) {
+      console.log(response)
+      return res.status(200).send(response.data)
+    })
+    .catch(function (error) {
+      return Promise.reject(error.response);
+    })
 }
