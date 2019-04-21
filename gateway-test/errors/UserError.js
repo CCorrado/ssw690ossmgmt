@@ -7,7 +7,7 @@ class UserError extends HttpError {
     super(statusCode, { error, message, hint })
   }
 
-  static makeServiceError (message) {
+  static makeServiceError () {
     return new HttpError(400)
   }
 

@@ -15,10 +15,6 @@ class HttpError extends Error {
   getBody () {
     return this.body
   }
-
-  static makeNotFoundError () {
-    return new HttpError(404)
-  }
 }
 
 module.exports = HttpError

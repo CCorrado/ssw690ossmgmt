@@ -1,9 +1,11 @@
 package com.ossp.database.service.session
 
+import com.ossp.database.error.ObjectNotCreated
 import com.ossp.database.error.ObjectNotFound
 import com.ossp.database.model.Session
 import com.ossp.database.repository.SessionRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -16,10 +18,14 @@ class SessionServiceImpl : SessionService {
     override fun listAllSessions(userId: Long?): List<Session> {
         val all = ArrayList<Session>()
 
-        sessionRepository?.let { repository ->
-            for (session in repository.findAllByUserId(userId)) {
-                all.add(session)
+        try {
+            sessionRepository?.let { repository ->
+                for (session in repository.findAllByUserId(userId)) {
+                    all.add(session)
+                }
             }
+        } catch (err: Exception) {
+            throw ObjectNotFound(message = "Could not find sessions for user with id: $userId")
         }
 
         return all
@@ -27,18 +33,33 @@ class SessionServiceImpl : SessionService {
 
     override fun findById(id: Long?): Session? {
         id?.let { sessionId ->
-            return this.sessionRepository?.findById(sessionId)?.get()
+            try {
+                return this.sessionRepository?.findById(sessionId)?.get()
+            } catch (err: Exception) {
+                throw ObjectNotFound(message = "Could not find session with id: $id")
+            }
         } ?: run {
-            throw ObjectNotFound(message = "Could not find session with id $id")
+            throw ObjectNotFound(message = "Could not find session with id: $id")
         }
     }
 
     override fun findSessionByUserId(userId: Long): Session? {
-        return sessionRepository?.findByUserId(userId)
+        try {
+            return sessionRepository?.findByUserId(userId)
+        } catch (err: Exception) {
+            throw ObjectNotFound(message = "Could not find session for user with id: $userId")
+        }
     }
 
     override fun create(session: Session): Session? {
-        return this.sessionRepository?.save(session)
+        try {
+            return this.sessionRepository?.save(session)
+        } catch (err: Exception) {
+            throw ObjectNotCreated(
+                    status = HttpStatus.BAD_REQUEST,
+                    message = "Could not create session for userId: ${session.userId}"
+            )
+        }
     }
 
 }

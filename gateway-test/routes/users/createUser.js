@@ -65,10 +65,10 @@ module.exports = function (req, res) {
     'client_secret': userRequest.client_secret,
     'name': userRequest.name,
     'role': userRequest.role,
-    "access_token": userToken.access_token,
-    "token_type": userToken.token_type,
-    "expires_in": userToken.expires_in,
-    "refresh_token": userToken.refresh_token
+    "accessToken": userToken.access_token,
+    "tokenType": userToken.token_type,
+    "expiresIn": userToken.expires_in,
+    "refreshToken": userToken.refresh_token
   }
 
   sendNewUser(res, newRequest)
@@ -76,12 +76,11 @@ module.exports = function (req, res) {
 
 function sendNewUser (res, user) {
   //Save this user to the database
-  axios.post('http://osspmgmt-spring-boot:8080/users', user)
+  return axios.post('http://osspmgmt-spring-boot:8080/users', user)
     .then(function (response) {
-      console.log(response)
       return res.status(201).send(response.data)
     })
     .catch(function (error) {
-      return Promise.reject(error.response);
+      return res.status(error.response.status).send(error.response.data)
     })
 }

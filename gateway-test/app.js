@@ -9,7 +9,7 @@ const port = process.env.HTTP_PORT || 3000
 
 // Parse JSON request bodies
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Set up routes
 app.use(require('./routes'))

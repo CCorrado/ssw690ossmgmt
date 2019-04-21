@@ -2,10 +2,8 @@
 
 const clients = require('../../models/clients')
 const OAuthError = require('../../errors/OAuthError')
-const HttpError = require('../../errors/HttpError')
 const jwt = require('jsonwebtoken')
 const axios = require("axios");
-const UserError = require("../../errors/UserError");
 
 /**
  * @typedef TokenRequest
@@ -118,18 +116,18 @@ function sendToken (res, subject) {
 
   const UserSession = {
     "userId": options.subject,
-    "access_token": jwt.sign({}, 'ossp', Object.assign(options, { expiresIn: '2 hours' })),
-    "token_type": "bearer",
-    "expires_in": 60 * 60 * 24,
-    "refresh_token": jwt.sign({}, 'ossp', Object.assign(options, { expiresIn: '2 days' }))
+    "accessToken": jwt.sign({}, 'ossp', Object.assign(options, { expiresIn: '2 hours' })),
+    "tokenType": "bearer",
+    "expiresIn": 60 * 60 * 24,
+    "refreshToken": jwt.sign({}, 'ossp', Object.assign(options, { expiresIn: '2 days' }))
   }
 
   //Save this user to the database
-  axios.post('http://osspmgmt-spring-boot:8080/users', UserSession)
+  return axios.post('http://osspmgmt-spring-boot:8080/users', UserSession)
     .then(function (response) {
       return res.status(201).send(response.data)
     })
     .catch(function (error) {
-      return Promise.reject(error.response);
-    });
+      return res.status(error.response.status).send(error.response.data)
+    })
 }

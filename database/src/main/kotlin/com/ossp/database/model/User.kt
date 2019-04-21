@@ -14,7 +14,7 @@ class User {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     @Column(name = "userId")
-    var userId: Long? = 0
+    var userId: Long = 0
 
     @Column(name = "role")
     var role: String? = null

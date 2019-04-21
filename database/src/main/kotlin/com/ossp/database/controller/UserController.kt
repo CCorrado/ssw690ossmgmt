@@ -28,16 +28,31 @@ class UserController {
     }
 
     @RequestMapping(path = ["/users/{id}"])
-    operator fun get(@PathVariable("id") id: Long?): User? {
-        userService?.findById(id)?.let {
-            return it
+    operator fun get(@PathVariable("id") id: Long?): UserSession? {
+        userService?.findById(id)?.let { user ->
+            sessionService?.findSessionByUserId(user.userId)?.let { session ->
+                return UserSession(
+                        userId = user.userId,
+                        sessionId = session.sessionId,
+                        role = user.role,
+                        name = user.name,
+                        username = user.username,
+                        userCreatedDate = user.createdDate,
+                        sessionCreatedDate = session.createdDate,
+                        refreshToken = session.refreshToken,
+                        accessToken = session.accessToken,
+                        expiresIn = session.expiresIn,
+                        tokenType = session.tokenType,
+                        password = null
+                )
+            }
         } ?: run {
             throw ObjectNotFound(message = "User with id $id not found")
         }
     }
 
-    @RequestMapping(path = ["/users/{username}"])
-    fun getByUsername(@PathVariable("username") username: String): AuthInfo {
+    @RequestMapping(method = [RequestMethod.GET])
+    fun getByUsername(@RequestParam(value = "username") username: String): AuthInfo {
         val user = userService?.findByUsername(username)
 
         user?.let {
