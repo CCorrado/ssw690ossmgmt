@@ -2,6 +2,8 @@
 
 const express = require('express')
 const bodyParser = require('body-parser')
+const https = require('https');
+const fs = require('fs')
 
 const app = express()
 const expressSwagger = require('express-swagger-generator')(app);
@@ -46,6 +48,8 @@ const options = {
 
 expressSwagger(options)
 
-app.listen(port, () => {
-  console.log(`Running on port ${port}`)
-})
+https.createServer({
+  key: fs.readFileSync('./key.pem'),
+  cert: fs.readFileSync('./cert.pem'),
+  passphrase: 'ossp'
+}, app).listen(port);
