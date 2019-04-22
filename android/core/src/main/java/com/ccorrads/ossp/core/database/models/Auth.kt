@@ -10,7 +10,8 @@ import com.google.gson.annotations.SerializedName
 data class Auth(
     @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(name = "accessToken") @SerializedName("accessToken") val accessToken: String,
-    @ColumnInfo(name = "refreshToken") @SerializedName("refreshToken") val refreshToken: String
+    @ColumnInfo(name = "refreshToken") @SerializedName("refreshToken") val refreshToken: String,
+    @ColumnInfo(name = "userId") @SerializedName("userId") val userId: Int
 ) {
 
     companion object {
