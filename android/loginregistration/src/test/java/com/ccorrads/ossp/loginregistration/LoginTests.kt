@@ -1,6 +1,7 @@
 package com.ccorrads.ossp.loginregistration
 
 import com.ccorrads.ossp.core.database.dao.AuthDao
+import com.ccorrads.ossp.core.database.dao.UserDao
 import com.ccorrads.ossp.core.injection.NetworkModule
 import com.ccorrads.ossp.core.network.BackendService
 import com.ccorrads.ossp.core.network.NetworkUtil
@@ -21,6 +22,9 @@ class LoginTests : TestCase() {
     lateinit var authDao: AuthDao
 
     @Mock
+    lateinit var userDao: UserDao
+
+    @Mock
     lateinit var backendService: BackendService
 
     @Mock
@@ -31,7 +35,7 @@ class LoginTests : TestCase() {
 
     @Before
     fun setUpTests() {
-        presenter = LoginRegisterPresenter(networkUtil, backendService, authDao, rxSchedulers)
+        presenter = LoginRegisterPresenter(networkUtil, backendService, authDao, userDao, rxSchedulers)
     }
 
     @Test

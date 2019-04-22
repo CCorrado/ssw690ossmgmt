@@ -2,16 +2,20 @@ package com.ccorrads.ossp.loginregistration.registration.injection
 
 import android.util.Log
 import com.ccorrads.ossp.core.database.dao.AuthDao
+import com.ccorrads.ossp.core.database.dao.UserDao
 import com.ccorrads.ossp.core.database.models.Auth
+import com.ccorrads.ossp.core.database.models.User
 import com.ccorrads.ossp.core.injection.NetworkModule
 import com.ccorrads.ossp.core.network.BackendService
 import com.ccorrads.ossp.core.network.NetworkUtil
 import com.ccorrads.ossp.core.network.models.RegisterRequest
+import com.ccorrads.ossp.core.network.models.UserResponse
 import com.ccorrads.ossp.core.network.observers.SingleErrorHandlingObserver
 import com.ccorrads.ossp.loginregistration.registration.RegisterMvp
 import com.ccorrads.ossp.loginregistration.views.ValidatableText
 import io.reactivex.disposables.CompositeDisposable
 import org.joda.time.DateTime
+import java.util.*
 import javax.inject.Inject
 
 class RegisterPresenter
@@ -19,6 +23,7 @@ class RegisterPresenter
     private val backendService: BackendService,
     private val rxSchedulers: NetworkModule.RxSchedulers,
     private val networkUtil: NetworkUtil,
+    private val userDao: UserDao,
     private val authDao: AuthDao
 ) : RegisterMvp.Presenter {
 
@@ -35,24 +40,42 @@ class RegisterPresenter
 
     override fun registerUser(registerView: RegisterMvp.View, username: String?, pw: String?, fullName: String?) {
         backendService.registerUser(
-                RegisterRequest(
-                        userName = username,
-                        password = pw,
-                        name = fullName,
-                        createDate = DateTime.now(),
-                        role = "SSW 690 Demo"
-                )
+            RegisterRequest(
+                userName = username,
+                password = pw,
+                name = fullName,
+                createDate = DateTime.now(),
+                role = "Consumer"
+            )
         ).observeOn(rxSchedulers.main).subscribeOn(rxSchedulers.disk).subscribe(getObserver(registerView))
     }
 
-    private fun getObserver(registerView: RegisterMvp.View): SingleErrorHandlingObserver<Auth> {
-        return object : SingleErrorHandlingObserver<Auth>(networkUtil, disposable, registerView) {
-            override fun onSuccess(t: Auth) {
+    private fun getObserver(registerView: RegisterMvp.View): SingleErrorHandlingObserver<UserResponse> {
+        return object : SingleErrorHandlingObserver<UserResponse>(networkUtil, disposable, registerView) {
+            override fun onSuccess(t: UserResponse) {
                 super.onSuccess(t)
                 authDao.clear()
-                authDao.insertAuth(t)
+                userDao.clear()
+                userDao.insertUser(
+                    User(
+                        dbId = t.userId,
+                        type = t.role,
+                        role = User.UserRole.Consumer,
+                        fullName = t.name,
+                        id = UUID.randomUUID().toString(),
+                        age = t.userCreatedDate.toDateTimeISO().toString()
+                    )
+                )
+                authDao.insertAuth(
+                    Auth(
+                        accessToken = t.accessToken,
+                        refreshToken = t.refreshToken,
+                        userId = t.userId,
+                        id = t.sessionId
+                    )
+                )
                 registerView.hideProgress()
-                registerView.showMessage("User is successfully Registered!!")
+                registerView.showMessage("User is successfully Registered!")
             }
 
             override fun onError(t: Throwable) {

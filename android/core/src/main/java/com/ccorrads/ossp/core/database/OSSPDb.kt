@@ -10,7 +10,7 @@ import com.ccorrads.ossp.core.database.models.User
 
 @Database(
     entities = [Auth::class, User::class],
-    version = 1, exportSchema = false
+    version = 2, exportSchema = false
 )
 @TypeConverters(Converters::class)
 abstract class OSSPDb : RoomDatabase() {

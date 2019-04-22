@@ -1,4 +1,4 @@
-package com.ossp.database.service
+package com.ossp.database.service.user
 
 import com.ossp.database.model.User
 

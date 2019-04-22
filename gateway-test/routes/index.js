@@ -1,9 +1,12 @@
-let express = require('express');
-let router = express.Router();
+'use strict'
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('index', { title: '690SSWOSMG' });
-});
+const router = require('express-promise-router')()
 
-module.exports = router;
+const checkAccessToken = require('../middleware/checkAccessToken')
+
+router.use('/currentSession', checkAccessToken, require('./currentSession'))
+router.use('/users/getUser', checkAccessToken, require('./users/getUser'))
+router.use('/users/register', require('./users/createUser'))
+router.use('/users/login', require('./users/loginUser'))
+
+module.exports = router

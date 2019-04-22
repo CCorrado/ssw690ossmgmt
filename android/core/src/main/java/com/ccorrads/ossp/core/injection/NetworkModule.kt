@@ -54,7 +54,7 @@ class NetworkModule {
         val okHttpBuilder = OkHttpClient.Builder()
         okHttpBuilder.addInterceptor(DefaultInterceptor().defaultInterceptor)
         okHttpBuilder.addInterceptor(interceptor)
-        okHttpBuilder.addInterceptor(StethoInterceptor())
+        okHttpBuilder.addNetworkInterceptor(StethoInterceptor())
         //Handle cookies
         okHttpBuilder.cookieJar(cookieJar)
 
