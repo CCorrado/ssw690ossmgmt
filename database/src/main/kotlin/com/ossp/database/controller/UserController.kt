@@ -2,7 +2,6 @@ package com.ossp.database.controller
 
 import com.ossp.database.error.ObjectNotCreated
 import com.ossp.database.error.ObjectNotFound
-import com.ossp.database.model.AuthInfo
 import com.ossp.database.model.Session
 import com.ossp.database.model.User
 import com.ossp.database.model.UserSession
@@ -48,17 +47,6 @@ class UserController {
             }
         } ?: run {
             throw ObjectNotFound(message = "User with id $id not found")
-        }
-    }
-
-    @RequestMapping(method = [RequestMethod.GET])
-    fun getByUsername(@RequestParam(value = "username") username: String): AuthInfo {
-        val user = userService?.findByUsername(username)
-
-        user?.let {
-            return AuthInfo(it.username, it.password)
-        } ?: run {
-            throw ObjectNotFound(message = "User with username $username not found")
         }
     }
 
