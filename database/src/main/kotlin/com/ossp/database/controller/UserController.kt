@@ -64,32 +64,54 @@ class UserController {
 
     @RequestMapping(path = ["/users"], method = [RequestMethod.POST])
     fun createUser(@RequestBody userSession: UserSession): UserSession? {
-        var user: User? = null
+        val user = userService?.create(makeUserFromRequest(userSession))
 
+        val session: Session? = sessionService?.create(makeSessionFromRequest(user?.userId, userSession))
+        return UserSession(
+                userId = user?.userId,
+                sessionId = session?.sessionId,
+                role = user?.role,
+                name = user?.name,
+                username = user?.username,
+                userCreatedDate = user?.createdDate,
+                sessionCreatedDate = session?.createdDate,
+                refreshToken = session?.refreshToken,
+                accessToken = session?.accessToken,
+                expiresIn = session?.expiresIn,
+                tokenType = session?.tokenType,
+                password = null
+        )
+    }
+
+    @RequestMapping(path = ["/users/newSession"], method = [RequestMethod.POST])
+    fun createSessionForUser(@RequestBody userSession: UserSession): UserSession? {
         userSession.username?.let { username ->
-            userService?.findByUsername(username)?.let {
-                user = it
-            } ?: run {
-                user = userService?.create(makeUserFromRequest(userSession))
+            userService?.findByUsername(username)?.let { user ->
+                if (!user.password.equals(userSession.password)) {
+                    throw ObjectNotCreated(
+                            message = "Bad username or password",
+                            status = HttpStatus.BAD_REQUEST
+                    )
+                }
+                val session: Session? = sessionService?.create(makeSessionFromRequest(user.userId, userSession))
+                return UserSession(
+                        userId = user.userId,
+                        sessionId = session?.sessionId,
+                        role = user.role,
+                        name = user.name,
+                        username = user.username,
+                        userCreatedDate = user.createdDate,
+                        sessionCreatedDate = session?.createdDate,
+                        refreshToken = session?.refreshToken,
+                        accessToken = session?.accessToken,
+                        expiresIn = session?.expiresIn,
+                        tokenType = session?.tokenType,
+                        password = null
+                )
             }
-            val session: Session? = sessionService?.create(makeSessionFromRequest(user?.userId, userSession))
-            return UserSession(
-                    userId = user?.userId,
-                    sessionId = session?.sessionId,
-                    role = user?.role,
-                    name = user?.name,
-                    username = user?.username,
-                    userCreatedDate = user?.createdDate,
-                    sessionCreatedDate = session?.createdDate,
-                    refreshToken = session?.refreshToken,
-                    accessToken = session?.accessToken,
-                    expiresIn = session?.expiresIn,
-                    tokenType = session?.tokenType,
-                    password = null
-            )
         } ?: run {
             throw ObjectNotCreated(
-                    message = "Could not create user $user",
+                    message = "Could not create user session",
                     status = HttpStatus.NOT_FOUND
             )
         }

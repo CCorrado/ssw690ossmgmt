@@ -53,6 +53,12 @@ class UserServiceImpl : UserService {
 
     override fun create(user: User): User? {
         try {
+            userRepository?.findByUsername(user.username)?.let {
+                throw ObjectNotCreated(
+                        status = HttpStatus.BAD_REQUEST,
+                        message = "User already exists with username: ${user.username}"
+                )
+            }
             return this.userRepository?.save(user)
         } catch (err: Exception) {
             throw ObjectNotCreated(
