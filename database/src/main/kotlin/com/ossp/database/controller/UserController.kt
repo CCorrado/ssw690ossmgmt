@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import java.util.*
+import javax.servlet.http.HttpServletRequest
 
 @RestController
 class UserController {
@@ -21,13 +22,38 @@ class UserController {
     @Autowired
     private val sessionService: SessionService? = null
 
-    @RequestMapping(path = ["/users"])
-    fun list(): List<User>? {
+    @RequestMapping(path = ["/users/all"])
+    fun getUsers(): List<User>? {
         return userService?.list()
     }
 
+    @RequestMapping(path = ["/users"])
+    fun getUser(
+            request: HttpServletRequest,
+            @RequestParam(name = "username", required = true) username: CharSequence
+    ): UserSession? {
+        userService?.findByUsername(request.queryString.split("=")[1])?.let { user ->
+                return UserSession(
+                        userId = user.userId,
+                        sessionId = null,
+                        role = user.role,
+                        name = user.name,
+                        username = user.username,
+                        userCreatedDate = user.createdDate,
+                        sessionCreatedDate = null,
+                        refreshToken = null,
+                        accessToken = null,
+                        expiresIn = null,
+                        tokenType = null,
+                        password = user.password
+                )
+        } ?: run {
+            throw ObjectNotFound(message = "User not found")
+        }
+    }
+
     @RequestMapping(path = ["/users/{id}"])
-    operator fun get(@PathVariable("id") id: Long?): UserSession? {
+    fun get(@PathVariable("id") id: Long?): UserSession? {
         userService?.findById(id)?.let { user ->
             sessionService?.findSessionByUserId(user.userId)?.let { session ->
                 return UserSession(
@@ -42,7 +68,7 @@ class UserController {
                         accessToken = session.accessToken,
                         expiresIn = session.expiresIn,
                         tokenType = session.tokenType,
-                        password = null
+                        password = user.password
                 )
             }
         } ?: run {
@@ -75,12 +101,6 @@ class UserController {
     fun createSessionForUser(@RequestBody userSession: UserSession): UserSession? {
         userSession.username?.let { username ->
             userService?.findByUsername(username)?.let { user ->
-                if (!user.password.equals(userSession.password)) {
-                    throw ObjectNotCreated(
-                            message = "Bad username or password",
-                            status = HttpStatus.BAD_REQUEST
-                    )
-                }
                 val session: Session? = sessionService?.create(makeSessionFromRequest(user.userId, userSession))
                 return UserSession(
                         userId = user.userId,
