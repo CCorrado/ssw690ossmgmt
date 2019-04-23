@@ -75,7 +75,7 @@ class RegisterPresenter
                     )
                 )
                 registerView.hideProgress()
-                registerView.showMessage("User is successfully Registered!")
+                registerView.onAuthenticated()
             }
 
             override fun onError(t: Throwable) {

@@ -57,6 +57,7 @@ class LoginRegisterPresenter
                     )
                 )
                 loginView.hideProgress()
+                loginView.onAuthenticated()
             }
 
             override fun onError(t: Throwable) {

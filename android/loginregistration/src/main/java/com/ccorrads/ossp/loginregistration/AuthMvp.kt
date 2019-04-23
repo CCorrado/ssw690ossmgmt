@@ -7,6 +7,8 @@ class AuthMvp {
 
     interface View : Mvp.View {
         fun navigateToRegistration()
+
+        fun onAuthenticated()
     }
 
     interface Presenter : Mvp.Presenter {

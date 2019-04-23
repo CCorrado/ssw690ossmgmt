@@ -1,8 +1,10 @@
 package com.ccorrads.ossp.loginregistration.registration
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.ccorrads.ossp.core.BaseFragment
+import com.ccorrads.ossp.home.HomeActivity
 import com.ccorrads.ossp.loginregistration.LoginRegisterActivity
 import com.ccorrads.ossp.loginregistration.R
 import com.ccorrads.ossp.loginregistration.registration.injection.RegisterPresenter
@@ -50,5 +52,11 @@ class RegistrationFragment : BaseFragment(), RegisterMvp.View {
                 )
             }
         }
+    }
+
+    override fun onAuthenticated() {
+        val intent = Intent(activity, HomeActivity::class.java)
+        activity?.startActivity(intent)
+        activity?.finish()
     }
 }

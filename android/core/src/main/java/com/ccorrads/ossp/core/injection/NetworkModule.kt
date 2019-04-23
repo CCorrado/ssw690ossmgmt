@@ -20,6 +20,9 @@ import dagger.Provides
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.rx2.asCoroutineDispatcher
 import okhttp3.OkHttpClient
 import org.joda.time.DateTime
 import org.joda.time.LocalDate
@@ -86,6 +89,13 @@ class NetworkModule {
         val main: Scheduler
     )
 
+    data class CoroutineDispatchers(
+        val database: CoroutineDispatcher,
+        val disk: CoroutineDispatcher,
+        val network: CoroutineDispatcher,
+        val main: CoroutineDispatcher
+    )
+
     @Singleton
     @Provides
     fun provideRxSchedulers() = RxSchedulers(
@@ -94,4 +104,15 @@ class NetworkModule {
         network = Schedulers.io(),
         main = AndroidSchedulers.mainThread()
     )
+
+    @Singleton
+    @Provides
+    open fun provideDispatchers(schedulers: RxSchedulers) =
+
+        CoroutineDispatchers(
+            database = schedulers.database.asCoroutineDispatcher(),
+            disk = schedulers.disk.asCoroutineDispatcher(),
+            network = schedulers.network.asCoroutineDispatcher(),
+            main = Dispatchers.Main
+        )
 }

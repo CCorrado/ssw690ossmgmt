@@ -17,7 +17,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
         }
         debug {
             minifyEnabled false
@@ -39,6 +39,7 @@ android {
         exclude 'META-INF/NOTICE.txt'
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/atomicfu.kotlin_module'
     }
 }
 
@@ -46,7 +47,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation project(':core')
-    implementation project(':home')
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-inline:2.23.4'
     androidTestImplementation 'androidx.test:runner:1.1.1'
@@ -62,6 +62,8 @@ dependencies {
     implementation("com.google.dagger:dagger:$dagger_version")
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
+
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.0'
 
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroid_version"
     implementation "io.reactivex.rxjava2:rxjava:$rxJava_version"
