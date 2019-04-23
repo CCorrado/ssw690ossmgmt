@@ -1,8 +1,10 @@
 package com.ccorrads.ossp.loginregistration
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.ccorrads.ossp.core.BaseFragment
+import com.ccorrads.ossp.home.HomeActivity
 import com.ccorrads.ossp.loginregistration.registration.RegistrationFragment
 import kotlinx.android.synthetic.main.fragment_login_register.*
 import javax.inject.Inject
@@ -50,5 +52,11 @@ class LoginRegisterFragment : BaseFragment(), AuthMvp.View {
             ?.addToBackStack(RegistrationFragment::class.java.simpleName)
             ?.replace(R.id.fragment_container, RegistrationFragment())
             ?.commit()
+    }
+
+    override fun onAuthenticated() {
+        val intent = Intent(activity, HomeActivity::class.java)
+        activity?.startActivity(intent)
+        activity?.finish()
     }
 }

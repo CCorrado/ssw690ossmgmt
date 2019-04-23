@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:fitsSystemWindows="true">
+
+    <TextView
+            android:id="@+id/fragment_settings_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:textSize="24sp"
+            android:textColor="@android:color/black"
+            android:text="@string/nav_settings"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:id="@+id/settings_fragment_profile"
+            app:layout_constraintTop_toBottomOf="@id/fragment_settings_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/fragment_settings_logout">
+
+        <TextView
+                android:id="@+id/settings_profile_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                tools:text="ccorrads@gmail.com"/>
+
+        <TextView
+                android:id="@+id/settings_profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                tools:text="Chris Corrado"/>
+
+        <TextView
+                android:id="@+id/settings_profile_role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                tools:text="Consumer"/>
+
+        <TextView
+                android:id="@+id/settings_profile_created_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                tools:text="January 1, 2019"/>
+
+    </LinearLayout>
+
+    <TextView
+            android:id="@+id/fragment_settings_logout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="20dp"
+            android:background="@android:color/black"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:text="@string/logout"
+            app:layout_constraintTop_toBottomOf="@id/settings_fragment_profile"
+            app:layout_constraintBottom_toTopOf="@id/fragment_settings_version"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+            android:id="@+id/fragment_settings_version"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="20dp"
+            android:text="@string/version_string"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_settings_logout"
+            tools:text="Version 1.0 (1)"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

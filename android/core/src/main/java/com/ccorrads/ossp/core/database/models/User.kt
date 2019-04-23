@@ -14,7 +14,8 @@ data class User(
     @ColumnInfo(name = "id") @SerializedName("id") val id: String,
     @ColumnInfo(name = "role") @SerializedName("role") val role: UserRole,
     @ColumnInfo(name = "fullName") @SerializedName("fullName") val fullName: String?,
-    @ColumnInfo(name = "age") @SerializedName("age") val age: String?
+    @ColumnInfo(name = "age") @SerializedName("age") val age: String?,
+    @ColumnInfo(name = "createdDate") @SerializedName("createdDate") val createdDate: String
 ) {
     companion object {
         const val dbTableName: String = "user"

@@ -45,7 +45,8 @@ class LoginRegisterPresenter
                         role = User.UserRole.Consumer,
                         fullName = t.name,
                         id = UUID.randomUUID().toString(),
-                        age = t.userCreatedDate.toDateTimeISO().toString()
+                        age = t.userCreatedDate.toDateTimeISO().toString(),
+                        createdDate = t.userCreatedDate.toDateTimeISO().toString()
                     )
                 )
                 authDao.insertAuth(
@@ -53,10 +54,12 @@ class LoginRegisterPresenter
                         accessToken = t.accessToken,
                         refreshToken = t.refreshToken,
                         userId = t.userId,
-                        id = t.sessionId
+                        id = t.sessionId,
+                        createdDate = t.sessionCreatedDate.toDateTimeISO().toString()
                     )
                 )
                 loginView.hideProgress()
+                loginView.onAuthenticated()
             }
 
             override fun onError(t: Throwable) {

@@ -1,8 +1,10 @@
 package com.ccorrads.ossp.loginregistration.registration
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.ccorrads.ossp.core.BaseFragment
+import com.ccorrads.ossp.home.HomeActivity
 import com.ccorrads.ossp.loginregistration.LoginRegisterActivity
 import com.ccorrads.ossp.loginregistration.R
 import com.ccorrads.ossp.loginregistration.registration.injection.RegisterPresenter
@@ -43,12 +45,18 @@ class RegistrationFragment : BaseFragment(), RegisterMvp.View {
             ) {
                 showProgress()
                 presenter.registerUser(
-                    this,
-                    register_name_edit.text?.toString(),
-                    register_email_edit.text?.toString(),
-                    register_password_edit.text?.toString()
+                    registerView = this,
+                    fullName = register_name_edit.text?.toString(),
+                    username = register_email_edit.text?.toString(),
+                    pw = register_password_edit.text?.toString()
                 )
             }
         }
+    }
+
+    override fun onAuthenticated() {
+        val intent = Intent(activity, HomeActivity::class.java)
+        activity?.startActivity(intent)
+        activity?.finish()
     }
 }
