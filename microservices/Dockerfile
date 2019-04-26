@@ -11,4 +11,4 @@ COPY . /microservices
 # Commands in a list
 RUN ["pip3", "install", "-r", "requirements.txt"]
 
-CMD ["manager.py"]
+CMD ["python", "manager.py"]
