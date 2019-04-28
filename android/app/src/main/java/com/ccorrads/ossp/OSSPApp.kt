@@ -1,10 +1,14 @@
 package com.ccorrads.ossp
 
-import android.app.Application
+import com.ccorrads.ossp.core.BaseApplication
+import com.ccorrads.ossp.core.Router
+import com.ccorrads.ossp.loginregistration.LoginRegisterActivity
 import com.facebook.stetho.Stetho
 import net.danlew.android.joda.JodaTimeAndroid
 
-class OSSPApp : Application() {
+class OSSPApp : BaseApplication() {
+
+    private var component: OSSPComponent? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -22,5 +26,17 @@ class OSSPApp : Application() {
                 )
                 .build()
         )
+
+        buildComponent()
+
+        getRouter()?.setRegistrationActivity(LoginRegisterActivity::class.java)
+    }
+
+    override fun getRouter(): Router? {
+        return component?.getRouter()
+    }
+
+    private fun buildComponent() {
+        component = DaggerOSSPComponent.builder().context(this).build()
     }
 }

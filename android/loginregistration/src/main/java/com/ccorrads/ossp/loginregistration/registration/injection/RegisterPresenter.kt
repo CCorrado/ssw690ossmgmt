@@ -41,7 +41,7 @@ class RegisterPresenter
     override fun registerUser(registerView: RegisterMvp.View, username: String?, pw: String?, fullName: String?) {
         backendService.registerUser(
             RegisterRequest(
-                userName = username,
+                username = username,
                 password = pw,
                 name = fullName,
                 createDate = DateTime.now(),
@@ -63,7 +63,8 @@ class RegisterPresenter
                         role = User.UserRole.Consumer,
                         fullName = t.name,
                         id = UUID.randomUUID().toString(),
-                        age = t.userCreatedDate.toDateTimeISO().toString()
+                        age = t.userCreatedDate.toDateTimeISO().toString(),
+                        createdDate = t.userCreatedDate.toDateTimeISO().toString()
                     )
                 )
                 authDao.insertAuth(
@@ -71,11 +72,12 @@ class RegisterPresenter
                         accessToken = t.accessToken,
                         refreshToken = t.refreshToken,
                         userId = t.userId,
-                        id = t.sessionId
+                        id = t.sessionId,
+                        createdDate = t.sessionCreatedDate.toDateTimeISO().toString()
                     )
                 )
                 registerView.hideProgress()
-                registerView.showMessage("User is successfully Registered!")
+                registerView.onAuthenticated()
             }
 
             override fun onError(t: Throwable) {

@@ -3,6 +3,7 @@ package com.ccorrads.ossp.core.injection
 import android.content.Context
 import androidx.room.Room
 import com.ccorrads.ossp.core.R
+import com.ccorrads.ossp.core.Router
 import com.ccorrads.ossp.core.database.OSSPDb
 import com.ccorrads.ossp.core.database.dao.AuthDao
 import com.ccorrads.ossp.core.database.dao.UserDao
@@ -12,6 +13,8 @@ import javax.inject.Singleton
 
 @Module
 class DatabaseModule {
+
+    private var router: Router? = null
 
     @Provides
     @Singleton
@@ -32,5 +35,16 @@ class DatabaseModule {
     @Singleton
     fun providesUserDao(osspDb: OSSPDb): UserDao {
         return osspDb.getUserDao()
+    }
+
+    @Provides
+    @Singleton
+    fun providesRouter(): Router? {
+        router?.let {
+            return it
+        } ?: run {
+            router = Router()
+            return router
+        }
     }
 }

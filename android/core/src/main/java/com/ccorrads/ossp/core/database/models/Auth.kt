@@ -11,7 +11,8 @@ data class Auth(
     @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(name = "accessToken") @SerializedName("accessToken") val accessToken: String,
     @ColumnInfo(name = "refreshToken") @SerializedName("refreshToken") val refreshToken: String,
-    @ColumnInfo(name = "userId") @SerializedName("userId") val userId: Int
+    @ColumnInfo(name = "userId") @SerializedName("userId") val userId: Int,
+    @ColumnInfo(name = "createdDate") @SerializedName("createdDate") val createdDate: String
 ) {
 
     companion object {

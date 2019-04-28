@@ -13,11 +13,8 @@ const axios = require("axios");
  * @typedef RegisterRequest
  * @property {{tester1@test.com}} username - username (email)
  * @property {{Test1234}} password - user's password
- * @property {{uniqueID}} client_id - user's client id
- * @property {{uniqueSecret}} client_secret - user's secret
  * @property {{Chris}} name - user's name
  * @property {{User}} role - user's role (User, Business, etc)
- * @property {{password}} grant_type - Grant type that is supported (i.e. password, refresh_token)
  */
 
 /**

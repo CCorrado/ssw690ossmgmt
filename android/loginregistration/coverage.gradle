@@ -8,7 +8,7 @@ ext {
     limits = [
             'instruction': 7.0,
             'branch'     : 0.0,
-            'line'       : 2.0,
+            'line'       : 1.9,
             'complexity' : 2.0,
             'method'     : 3.0,
             'class'      : 11.0

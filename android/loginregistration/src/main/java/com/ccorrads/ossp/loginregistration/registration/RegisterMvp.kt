@@ -4,7 +4,9 @@ import com.ccorrads.ossp.core.Mvp
 import com.ccorrads.ossp.loginregistration.views.ValidatableText
 
 class RegisterMvp {
-    interface View : Mvp.View
+    interface View : Mvp.View {
+        fun onAuthenticated()
+    }
 
     interface Presenter : Mvp.Presenter {
 
