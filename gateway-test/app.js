@@ -1,5 +1,8 @@
 'use strict'
 
+const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
+
 const express = require('express')
 const bodyParser = require('body-parser')
 
@@ -10,6 +13,10 @@ const port = process.env.HTTP_PORT || 3000
 // Parse JSON request bodies
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(cookieParser());
+app.use(helmet());
+
 
 // Set up routes
 app.use(require('./routes'))

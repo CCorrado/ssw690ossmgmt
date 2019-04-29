@@ -1,27 +1,23 @@
 from datetime import datetime
 
+from flask import jsonify
 from werkzeug.security import check_password_hash, generate_password_hash
-
-from app import login_manager
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    # TODO get user from db/API for their ID
-    return User(int(user_id), "username", "name", "email@email.com", "Test1234")
 
 
 class User:
-    __slots__ = "id", "username", "name", "email", "password", "level", "active", "address"
+    __slots__ = "username", "password", "name", "role", "accessToken", "tokenType", "expiresIn", "refreshToken"
     created_at = datetime.now
     updated_at = datetime.now
 
-    def __init__(self, id, username, name, email, password):
-        self.id = id
+    def __init__(self, username, password, name, role, accessToken, tokenType, expiresIn, refreshToken):
         self.username = username
         self.name = name
-        self.email = email
-        self.set_password(password)
+        self.password = password
+        self.role = role
+        self.accessToken = accessToken
+        self.expiresIn = expiresIn
+        self.tokenType = tokenType
+        self.refreshToken = refreshToken
 
     def __repr__(self):
         return '<User %s>' % self.username
@@ -31,3 +27,15 @@ class User:
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
+
+    def toJSON(self):
+        return jsonify(
+            username=self.username,
+            password=self.password,
+            name=self.name,
+            role=self.role,
+            accessToken=self.accessToken,
+            tokenType=self.tokenType,
+            expiresIn=self.expiresIn,
+            refreshToken=self.refreshToken
+        )

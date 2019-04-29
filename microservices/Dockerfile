@@ -1,5 +1,5 @@
 # https://hub.docker.com/r/library/python/tags/
-FROM python:3
+FROM python:3.7
 
 WORKDIR /microservices
 

@@ -1,15 +1,13 @@
 from flasgger import swag_from
-from flask import Blueprint, request, session
-from flask_login import login_required, login_user, logout_user
-from werkzeug.security import check_password_hash
+from flask import request, abort, Blueprint
 
 from app.auth.models import User
 from .apis import *
 
-mod = Blueprint('auth', __name__, url_prefix='/auth')
+mod_auth = Blueprint('auth', __name__, url_prefix='/auth')
 
 
-@mod.route('/signin', methods=['POST'])
+@mod_auth.route('/signin', methods=['POST'])
 @swag_from(signin_spec)
 def sign_in():
     """
@@ -25,19 +23,24 @@ def sign_in():
            result schema:
              User object
        """
-    # TODO query API/Db for user
-    requested_user = request.data  # This is the User from the request, just username + password
-    stored_user = User(1, "name", "name", "email", "pw")
-    if stored_user and check_password_hash(stored_user.password, requested_user.password):
-        session['username'] = stored_user.username
-        session['email'] = stored_user.email
-        login_user(stored_user)
-        return
-    print('Wrong email or password', 'error-message')
+    requested_user = request.get_json()
+    user = User(
+        username=requested_user['username'],
+        password=requested_user['password'],
+        accessToken=requested_user['accessToken'],
+        tokenType=requested_user['tokenType'],
+        expiresIn=requested_user['expiresIn'],
+        refreshToken=requested_user['refreshToken'],
+        name='',
+        role=''
+    )
+    if user.check_password(requested_user['pwAttempted']):
+        return user.toJSON()
+    else:
+        abort(400)
 
 
-@mod.route('/signout', methods=['GET'])
-@login_required
+@mod_auth.route('/signout', methods=['GET'])
 def sign_out():
     """
         parameters:
@@ -50,10 +53,10 @@ def sign_out():
          200:
            description: Logout Success
     """
-    return logout_user()
+    abort(200)
 
 
-@mod.route('/signup', methods=['POST'])
+@mod_auth.route('/signup', methods=['POST'])
 @swag_from(signup_spec)
 def sign_up():
     """
@@ -69,29 +72,16 @@ def sign_up():
            result schema:
              User object
            """
-    # TODO store user and session in Db
-    return request.data
-
-
-@mod.route('/<user_id>', methods=['GET'])
-def get_user(user_id):
-    """
-    @:param id - The user ID
-       parameters:
-         - name: Get User for ID
-           required: userID and session token
-           description: Authenticated user to get profile
-       responses:
-         400: GET User failed
-           description: User request failed
-         401: GET User failed
-           description: User not authenticated
-         403: GET User failed
-           description: User forbidden
-         200:
-           description: Get User Success
-           result schema:
-             User object
-    """
-    # TODO get user from database/API
-    return User(id=user_id, username="", name="", email="", password="")
+    requested_user = request.get_json()
+    user = User(
+        username=requested_user['username'],
+        password=requested_user['password'],
+        name=requested_user['name'],
+        role=requested_user['role'],
+        accessToken=requested_user['accessToken'],
+        tokenType=requested_user['tokenType'],
+        expiresIn=requested_user['expiresIn'],
+        refreshToken=requested_user['refreshToken']
+    )
+    user.set_password(requested_user['password'])
+    return user.toJSON()

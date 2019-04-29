@@ -1,25 +1,13 @@
 from flasgger import Swagger
-from flask import Flask
-from flask_login import LoginManager
-from flask_wtf import CSRFProtect
+from flask import Flask, jsonify
 
 from config import config
-
-csrf = CSRFProtect()
-
-# Set up Flask-login
-login_manager = LoginManager()
-login_manager.session_protection = 'strong'
-login_manager.login_view = 'auth.signin'
 
 
 def create_app(config_name):
     """dynamic environment"""
     app = Flask(__name__)
     app.config.from_object(config[config_name])
-
-    csrf.init_app(app)
-    login_manager.init_app(app)
 
     api_config = {
         "headers": [
@@ -38,19 +26,34 @@ def create_app(config_name):
     Swagger(app, config=api_config)
 
     #  # HTTP error handling
-    #  @app.errorhandler(404)
-    #  def not_found(error):
-    #      return render_template('error/404.html'), 404
+    @app.errorhandler(404)
+    def not_found(error):
+        response = jsonify({'message': 'Not Found'})
+        response.status_code = 404
+        return response
 
-    #  @app.errorhandler(500)
-    #  def internal_server_error(error):
-    #      return render_template('error/500.html'), 500
+    @app.errorhandler(400)
+    def bad_request(error):
+        response = jsonify({'message': 'Bad Request'})
+        response.status_code = 400
+        return response
 
-    # Import a module / component using its blueprint handler variable
-    from app.auth.controllers import mod as auth_module
+    @app.errorhandler(405)
+    def bad_request(error):
+        response = jsonify({'message': 'Bad Method'})
+        response.status_code = 405
+        return response
 
-    # Register blueprint(s)
-    # app.register_blueprint(xyz_module)
+    @app.errorhandler(500)
+    def internal_server_error(error):
+        response = jsonify({'message': 'Server Error'})
+        response.status_code = 500
+        return response
+
+    from app.auth.controllers import mod_auth as auth_module
+    from app.orders.controllers import mod_orders as orders_module
+
     app.register_blueprint(auth_module)
+    app.register_blueprint(orders_module)
 
     return app
