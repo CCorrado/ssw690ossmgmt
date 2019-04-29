@@ -9,6 +9,6 @@ VOLUME /tmp
 COPY . /microservices
 
 # Commands in a list
-RUN ["pip3", "install", "-r", "requirements.txt"]
+RUN ["pip", "install", "-r", "requirements.txt"]
 
-CMD ["manager.py"]
+CMD ["python", "manager.py"]
