@@ -13,6 +13,9 @@ interface UserDao {
     @Query("SELECT * FROM ${User.dbTableName} WHERE ${"id"} = :id")
     fun getUserForId(id: Int): Flowable<User>
 
+    @Query("SELECT * FROM ${User.dbTableName} LIMIT 1")
+    fun getCurrentUser(): Flowable<User>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUser(user: User)
 

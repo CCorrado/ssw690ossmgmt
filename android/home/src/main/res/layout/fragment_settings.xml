@@ -28,7 +28,7 @@
             app:layout_constraintTop_toBottomOf="@id/fragment_settings_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/fragment_settings_logout">
+            app:layout_constraintBottom_toTopOf="@id/fragment_settings_create_biz">
 
         <TextView
                 android:id="@+id/settings_profile_username"
@@ -68,6 +68,22 @@
 
     </LinearLayout>
 
+
+    <TextView
+            android:id="@+id/fragment_settings_create_biz"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="20dp"
+            android:background="@android:color/black"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:text="@string/create_business"
+            app:layout_constraintTop_toBottomOf="@id/settings_fragment_profile"
+            app:layout_constraintBottom_toTopOf="@id/fragment_settings_logout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
     <TextView
             android:id="@+id/fragment_settings_logout"
             android:layout_width="0dp"
@@ -78,7 +94,7 @@
             android:textColor="@android:color/white"
             android:textSize="24sp"
             android:text="@string/logout"
-            app:layout_constraintTop_toBottomOf="@id/settings_fragment_profile"
+            app:layout_constraintTop_toBottomOf="@id/fragment_settings_create_biz"
             app:layout_constraintBottom_toTopOf="@id/fragment_settings_version"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>

@@ -1,6 +1,6 @@
 "use strict";
 
-const axios = requrie("axios");
+const axios = require("axios");
 
 /*
  * Create a new product for a given business
@@ -27,15 +27,23 @@ const axios = requrie("axios");
  * @property {{10}} quantity - quantity of the product
  */
 
+function createBusiness (product, res) {
+  return axios.post("http://osspmgmt-spring-boot:8080/business/products/create", product)
+    .then(function (response) {
+      return res.status(200).send(response.data)
+    }).catch(function (error) {
+      return res.status(error.response.status).send(error.response.data)
+    })
+}
+
 /**
- * @route GET /business/{businessId}/product
+ * @route POST /business/products/create
+ * @param {ProductRequest.model} ProductRequest.body.required - the new Product request
  * @group business - get products for a listed business
- * @param {int} id.query.required - The ID of the product
- * @returns {Product.model} 200 - return a List of Products
- * @returns {ErrorResponse.model} default - HTTPErr - Product (list) not found
+ * @returns {Product.model} 200 - Returns product model
+ * @returns {ErrorResponse.model} default - Product could not be created
  * @security JWT
  */
-
 module.exports = function (req, res) {
   const productRequest = {
     'name': req.body.name,
@@ -44,13 +52,4 @@ module.exports = function (req, res) {
   }
 
   createBusiness(productRequest, res)
-}
-
-function createBusiness (product, res) {
-  return axios.post("http://osspmgmt-spring-boot:8080/business/products/create", product)
-    .then(function (response) {
-      return res.status(200).send(response.data)
-    }).catch(function (error) {
-      return res.status(error.response.status).send(error.response.data)
-    })
 }

@@ -27,7 +27,7 @@ const axios = require("axios");
  * @property {[string]} userId
  * @property {[string]} userCreatedDate
  * @property {[string]} SessionCreatedDate
- * @property {[string]} userId
+ * @property {[string]} name
  */
 
 /**

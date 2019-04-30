@@ -1,6 +1,6 @@
 "use strict";
 
-const axios = requrie("axios");
+const axios = require("axios");
 
 /*
  * View a list of products for a given business
@@ -14,8 +14,8 @@ const axios = requrie("axios");
 
 /**
  * @typedef Product
- * @property {{DoubleCheeseBurger}} productname - product name
- * @property {{uniqueID}} product_id - product ID
+ * @property {{DoubleCheeseBurger}} name - product name
+ * @property {{uniqueID}} id - product ID
  * @property {{$10.00}} price - price
  * @property {{2}} quantity - quantity of the product
  */
@@ -28,7 +28,6 @@ const axios = requrie("axios");
  * @returns {ErrorResponse.model} default - HTTPErr - Product (list) not found
  * @security JWT
  */
-
 module.exports = function (req, res) {
   return axios.get("http://osspmgmt-spring-boot:8080/business/" + req.query.id + "/products")
     .then(function (response) {

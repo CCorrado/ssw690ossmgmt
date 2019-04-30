@@ -58,6 +58,7 @@ class RegisterPresenter
                 userDao.clear()
                 userDao.insertUser(
                     User(
+                        username = t.username,
                         dbId = t.userId,
                         type = t.role,
                         role = User.UserRole.Consumer,
