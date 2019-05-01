@@ -1,12 +1,6 @@
-package bao.webapp.model;
+package com.ossp.database.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity(name = "Inventories")
 public class Inventory {

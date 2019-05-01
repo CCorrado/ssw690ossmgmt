@@ -1,11 +1,10 @@
-package bao.webapp.repository;
+package com.ossp.database.repository;
 
-import java.util.List;
-
+import com.ossp.database.model.Inventory;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import bao.webapp.model.Inventory;
+import java.util.List;
 
 @Repository
 public interface InventoryRepository extends CrudRepository<Inventory, Long> {
