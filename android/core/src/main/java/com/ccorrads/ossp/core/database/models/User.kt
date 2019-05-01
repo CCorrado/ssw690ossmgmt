@@ -10,6 +10,7 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = dbTableName)
 data class User(
     @PrimaryKey val dbId: Int,
+    @ColumnInfo(name = "username") @SerializedName("username") val username: String,
     @ColumnInfo(name = "type") @SerializedName("type") val type: String,
     @ColumnInfo(name = "id") @SerializedName("id") val id: String,
     @ColumnInfo(name = "role") @SerializedName("role") val role: UserRole,
@@ -19,6 +20,7 @@ data class User(
 ) {
     companion object {
         const val dbTableName: String = "user"
+        const val dbIdColumn: String = "id"
     }
 
     enum class UserRole {

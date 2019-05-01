@@ -1,6 +1,6 @@
 {
-  "name": "test",
-  "version": "0.0.1",
+  "name": "ssw690ossmgmt",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "start": "node app.js"

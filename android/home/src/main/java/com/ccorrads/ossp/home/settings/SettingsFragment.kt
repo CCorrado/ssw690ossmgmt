@@ -9,6 +9,8 @@ import com.ccorrads.ossp.core.BaseFragment
 import com.ccorrads.ossp.home.HomeActivity
 import com.ccorrads.ossp.home.R
 import kotlinx.android.synthetic.main.fragment_settings.*
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
 import javax.inject.Inject
 
 class SettingsFragment : BaseFragment(), SettingsMvp.View {
@@ -27,7 +29,25 @@ class SettingsFragment : BaseFragment(), SettingsMvp.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        presenter.init(this)
         fragment_settings_logout.setOnClickListener { presenter.logout((activity?.application as? BaseApplication)?.getRouter()) }
     }
 
+    override fun setName(name: String?) {
+        settings_profile_name.text = name
+    }
+
+    override fun setEmail(email: String?) {
+        settings_profile_username.text = email
+    }
+
+    override fun setCreatedDate(dateTime: DateTime?) {
+        dateTime?.let {
+            settings_profile_created_date.text = DateTimeFormat.fullDate().print(it)
+        }
+    }
+
+    override fun setRole(role: String?) {
+        settings_profile_role.text = role
+    }
 }

@@ -1,0 +1,95 @@
+{
+	"_type": "Project",
+	"_id": "AAAAAAFF+h6SjaM2Hec=",
+	"name": "ssw690ossmgmt",
+	"ownedElements": [
+		{
+			"_type": "UMLModel",
+			"_id": "AAAAAAFF+qBWK6M3Z8Y=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"ownedElements": [
+				{
+					"_type": "UMLCollaboration",
+					"_id": "AAAAAAFqW1wmyR58ey0=",
+					"_parent": {
+						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+					},
+					"name": "Business",
+					"ownedElements": [
+						{
+							"_type": "UMLInteraction",
+							"_id": "AAAAAAFqW1wmyR59Uqc=",
+							"_parent": {
+								"$ref": "AAAAAAFqW1wmyR58ey0="
+							},
+							"name": "viewProducts",
+							"ownedElements": [
+								{
+									"_type": "UMLSequenceDiagram",
+									"_id": "AAAAAAFqW1wmyR5+apk=",
+									"_parent": {
+										"$ref": "AAAAAAFqW1wmyR59Uqc="
+									},
+									"name": "SequenceDiagram1",
+									"ownedViews": [
+										{
+											"_type": "UMLFrameView",
+											"_id": "AAAAAAFqW1wmyR5/Uiw=",
+											"_parent": {
+												"$ref": "AAAAAAFqW1wmyR5+apk="
+											},
+											"model": {
+												"$ref": "AAAAAAFqW1wmyR5+apk="
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAFqW1wmyR6AF0g=",
+													"_parent": {
+														"$ref": "AAAAAAFqW1wmyR5/Uiw="
+													},
+													"font": "Arial;13;0",
+													"left": 75.97900390625,
+													"top": 10,
+													"width": 115.9052734375,
+													"height": 13,
+													"text": "SequenceDiagram1"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAFqW1wmyR6Bk9g=",
+													"_parent": {
+														"$ref": "AAAAAAFqW1wmyR5/Uiw="
+													},
+													"font": "Arial;13;1",
+													"left": 10,
+													"top": 10,
+													"width": 60.97900390625,
+													"height": 13,
+													"text": "interaction"
+												}
+											],
+											"font": "Arial;13;0",
+											"left": 5,
+											"top": 5,
+											"width": 695,
+											"height": 595,
+											"nameLabel": {
+												"$ref": "AAAAAAFqW1wmyR6AF0g="
+											},
+											"frameTypeLabel": {
+												"$ref": "AAAAAAFqW1wmyR6Bk9g="
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
