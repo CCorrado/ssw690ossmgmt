@@ -3,7 +3,7 @@
 const axios = require("axios");
 
 /*
- * View a list of products for a given business
+ * Create a list of products for a given business
  */
 
 /**
@@ -33,7 +33,7 @@ function createBusiness (business, res) {
       return res.status(200).send(response.data)
     }).catch(function (error) {
       return res.status(error.response.status).send(error.response.data)
-    })
+    });
 }
 
 /**
@@ -51,5 +51,5 @@ module.exports = function (req, res) {
     'userId': req.body.userId
   }
 
-  createBusiness(businessRequest, res)
+  createBusiness(businessRequest, res);
 }

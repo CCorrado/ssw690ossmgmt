@@ -54,11 +54,11 @@ function getUserObjectIfExists(res, user) {
         })
         .catch(function (error) {
             return res.status(error.response.status).send(error.response.data)
-        })
+        });
 }
 
 function hashUserData(res, user, pwAttempted, userToken) {
-    user.pwAttempted = pwAttempted
+    user.pwAttempted = pwAttempted;
     return axios.post('http://ossp-microservices:5000/auth/signin', user)
         .then(function (response) {
             response.data.accessToken = userToken.accessToken
@@ -69,7 +69,7 @@ function hashUserData(res, user, pwAttempted, userToken) {
         })
         .catch(function (error) {
             return res.status(error.response.status).send(error.response.data)
-        })
+        });
 }
 
 function sendLoginUser(res, user) {
@@ -80,5 +80,5 @@ function sendLoginUser(res, user) {
         })
         .catch(function (error) {
             return res.status(error.response.status).send(error.response.data)
-        })
+        });
 }

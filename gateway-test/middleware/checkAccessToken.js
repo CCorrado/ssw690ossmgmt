@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const OAuthError = require('../errors/OAuthError')
 const jwt = require('jsonwebtoken')

@@ -74,7 +74,7 @@ function hashUserData(res, user) {
       })
       .catch(function (error) {
           return res.status(error.response.status).send(error.response.data)
-      })
+      });
 }
 
 function sendNewUser(res, user) {
@@ -85,5 +85,5 @@ function sendNewUser(res, user) {
         })
         .catch(function (error) {
             return res.status(error.response.status).send(error.response.data)
-        })
+        });
 }

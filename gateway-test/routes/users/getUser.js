@@ -33,5 +33,5 @@ module.exports = function (req, res) {
     })
     .catch(function (error) {
       return res.status(error.response.status).send(error.response.data)
-    })
+    });
 }
