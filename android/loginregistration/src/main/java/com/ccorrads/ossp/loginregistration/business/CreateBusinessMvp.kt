@@ -4,9 +4,19 @@ import com.ccorrads.ossp.core.Mvp
 
 class CreateBusinessMvp {
 
-    interface View : Mvp.View{
+    interface View : Mvp.View {
         fun openMapsIntent(location: String)
+
+        fun getName(): String
+
+        fun getLocation(): String
+
+        fun onBusinessCreated()
     }
 
-    interface Presenter : Mvp.Presenter
+    interface Presenter : Mvp.Presenter {
+        fun searchForLocation(view: View, location: String)
+
+        fun createBusinessForUser(view: View)
+    }
 }

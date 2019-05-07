@@ -14,5 +14,6 @@
     <string name="error_field_required">This field is required</string>
     <string name="create_business">Create Business</string>
 
+    <string name="tap_to_search">Tap to search for a full address</string>
     <string name="prompt_register_business">Create Business</string>
 </resources>

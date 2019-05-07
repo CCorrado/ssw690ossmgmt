@@ -3,6 +3,7 @@ package com.ccorrads.ossp
 import com.ccorrads.ossp.core.BaseApplication
 import com.ccorrads.ossp.core.Router
 import com.ccorrads.ossp.loginregistration.LoginRegisterActivity
+import com.ccorrads.ossp.loginregistration.business.CreateBusinessActivity
 import com.facebook.stetho.Stetho
 import net.danlew.android.joda.JodaTimeAndroid
 
@@ -30,6 +31,7 @@ class OSSPApp : BaseApplication() {
         buildComponent()
 
         getRouter()?.setRegistrationActivity(LoginRegisterActivity::class.java)
+        getRouter()?.setCreateBusinessActivity(CreateBusinessActivity::class.java)
     }
 
     override fun getRouter(): Router? {

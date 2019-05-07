@@ -19,6 +19,9 @@ class Business {
     @Column(name = "businessName")
     var businessName: String? = null
 
+    @Column(name = "location")
+    var location: String? = null
+
     @Column(name = "createdDate")
     var createDate: Date? = null
 }

@@ -1,8 +1,7 @@
 package com.ossp.database.service.business;
 
-import com.ossp.database.model.Inventory;
+import com.ossp.database.model.Business;
 import com.ossp.database.repository.BusinessRepository;
-import com.ossp.database.repository.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,20 +16,18 @@ public class BusinessServiceImpl implements BusinessService {
     @Autowired
     private BusinessRepository businessRepository;
 
-    @Autowired
-    private InventoryRepository inventoryRepository;
-
     @Override
-    public void create(Inventory inventory) {
-        this.inventoryRepository.save(inventory);
+    public Business create(Business business) {
+        return this.businessRepository.save(business);
     }
 
     @Override
-    public List<Inventory> findByBusinessID(long businessID) {
-        List<Inventory> all = new ArrayList<>();
+    public List<Business> findByBusinessID(long businessID) {
+        List<Business> all = new ArrayList<>();
 
-        for (Inventory inventory : this.inventoryRepository.findByBusiness(businessID))
-            all.add(inventory);
+        for (Business business : this.businessRepository.findAll()) {
+            all.add(business);
+        }
 
         return all;
     }

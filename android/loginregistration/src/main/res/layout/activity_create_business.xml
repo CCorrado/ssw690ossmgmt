@@ -41,7 +41,7 @@
                     android:id="@+id/register_business_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/prompt_name"
+                    android:hint="Business Name"
                     android:theme="@style/TextLabel"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
@@ -64,7 +64,7 @@
                     android:id="@+id/register_business_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/prompt_email"
+                    android:hint="Enter Location"
                     android:theme="@style/TextLabel"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
@@ -80,17 +80,23 @@
                         style="@style/HintText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress"/>
+                        android:inputType="text"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <ImageView
-                    app:srcCompat="@drawable/ic_location_searching"
+            <TextView
+                    android:id="@+id/register_business_location_icon"
+                    android:drawableEnd="@drawable/ic_location_searching"
                     android:layout_width="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:padding="20dp"
+                    android:layout_gravity="center"
+                    android:text="@string/tap_to_search"
+                    style="@style/TextLabel"
                     android:layout_height="wrap_content"/>
 
             <Button
-                    android:id="@+id/fragment_register_business_button"
+                    android:id="@+id/register_business_button"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@color/colorPrimary"

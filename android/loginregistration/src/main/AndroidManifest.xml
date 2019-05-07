@@ -7,13 +7,10 @@
     <application>
         <activity
                 android:name=".LoginRegisterActivity"
-                android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+                android:screenOrientation="portrait"
+                android:label="@string/app_name"/>
+        <activity android:name=".business.CreateBusinessActivity"
+                  android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
