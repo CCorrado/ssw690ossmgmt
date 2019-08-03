@@ -1,12 +1,12 @@
 package com.ossp.database.service.business;
 
-import com.ossp.database.model.Inventory;
+import com.ossp.database.model.Business;
 
 import java.util.List;
 
 public interface BusinessService {
 
-    List<Inventory> findByBusinessID(long businessID);
+    List<Business> findByBusinessID(long businessID);
 
-    void create(Inventory inventory);
+    Business create(Business inventory);
 }

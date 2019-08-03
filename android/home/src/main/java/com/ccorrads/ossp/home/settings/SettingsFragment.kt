@@ -30,6 +30,13 @@ class SettingsFragment : BaseFragment(), SettingsMvp.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.init(this)
+
+        fragment_settings_create_biz.setOnClickListener {
+            context?.let {
+                (activity?.application as? BaseApplication)?.getRouter()?.createBusiness(it)
+            }
+        }
+
         fragment_settings_logout.setOnClickListener { presenter.logout((activity?.application as? BaseApplication)?.getRouter()) }
     }
 

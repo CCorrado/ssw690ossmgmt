@@ -14,7 +14,6 @@ import com.ccorrads.ossp.core.network.observers.SingleErrorHandlingObserver
 import com.ccorrads.ossp.loginregistration.AuthMvp
 import com.ccorrads.ossp.loginregistration.views.ValidatableText
 import io.reactivex.disposables.CompositeDisposable
-import java.util.*
 import javax.inject.Inject
 
 class LoginRegisterPresenter
@@ -45,7 +44,7 @@ class LoginRegisterPresenter
                         type = t.role,
                         role = User.UserRole.Consumer,
                         fullName = t.name,
-                        id = UUID.randomUUID().toString(),
+                        id = t.userId,
                         age = t.userCreatedDate.toDateTimeISO().toString(),
                         createdDate = t.userCreatedDate.toDateTimeISO().toString()
                     )

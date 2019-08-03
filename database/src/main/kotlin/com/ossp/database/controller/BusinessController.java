@@ -1,7 +1,7 @@
 package com.ossp.database.controller;
 
 import com.ossp.database.error.ObjectNotFound;
-import com.ossp.database.model.Inventory;
+import com.ossp.database.model.Business;
 import com.ossp.database.service.business.BusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,8 +15,8 @@ public class BusinessController {
     @Autowired
     private BusinessService businessService;
 
-    @RequestMapping("/business/{id}")
-    public List<Inventory> display(@PathVariable("id") Long id) {
+    @RequestMapping(path = "/business/{id}", method = RequestMethod.GET)
+    public List<Business> display(@PathVariable("id") Long id) {
         try {
             return businessService.findByBusinessID(id);
         } catch (Exception exp) {
@@ -24,10 +24,8 @@ public class BusinessController {
         }
     }
 
-    @RequestMapping(value = "/inventory", method = RequestMethod.POST)
-    public Boolean createInventory(@RequestBody Inventory inventory) {
-        businessService.create(inventory);
-
-        return true;
+    @RequestMapping(path = "/business/create", method = RequestMethod.POST)
+    public Business createBusiness(@RequestBody Business business) {
+        return businessService.create(business);
     }
 }

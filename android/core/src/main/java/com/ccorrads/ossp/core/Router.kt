@@ -5,10 +5,15 @@ import android.content.Intent
 
 class Router {
 
+    private var createBusinessActivity: Class<out BaseActivity>? = null
     private var registrationActivity: Class<out BaseActivity>? = null
 
     fun setRegistrationActivity(registerActivity: Class<out BaseActivity>) {
         registrationActivity = registerActivity
+    }
+
+    fun setCreateBusinessActivity(businessActivity: Class<out BaseActivity>) {
+        createBusinessActivity = businessActivity
     }
 
     fun logout(context: Context) {
@@ -16,6 +21,14 @@ class Router {
             val intent = Intent(context, activity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
+        }
+    }
+
+    fun createBusiness(context: Context) {
+        createBusinessActivity?.newInstance()?.let { activity ->
+            val intent = Intent(context, activity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
         }
