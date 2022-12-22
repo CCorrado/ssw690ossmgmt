@@ -16,7 +16,7 @@
     "express-promise-router": "^3.0.3",
     "helmet": "^3.16.0",
     "http-errors": "~1.6.2",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "request": "^2.88.0",
     "uuid": "latest"
   },
